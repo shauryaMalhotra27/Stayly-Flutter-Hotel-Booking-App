@@ -17,12 +17,15 @@ class AppIcons {
   static const String star = 'assets/icons/star.svg';
 
   // Account screen icons
-  static const String accountSettings = 'assets/icons/account/accountSettings.svg';
+  static const String accountSettings =
+      'assets/icons/account/accountSettings.svg';
   static const String appearance = 'assets/icons/account/appearence.svg';
-  static const String helpAndFeedback = 'assets/icons/account/helpAndFeedback.svg';
+  static const String helpAndFeedback =
+      'assets/icons/account/helpAndFeedback.svg';
   static const String inviteFriend = 'assets/icons/account/inviteFriend.svg';
   static const String notification = 'assets/icons/account/notification.svg';
-  static const String privacySecurity = 'assets/icons/account/privacySecurity.svg';
+  static const String privacySecurity =
+      'assets/icons/account/privacySecurity.svg';
   static const String profile = 'assets/icons/account/profile.svg';
   static const String subscription = 'assets/icons/account/subscription.svg';
 }

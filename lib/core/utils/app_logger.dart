@@ -6,9 +6,20 @@ import 'package:flutter/foundation.dart';
 class AppLogger {
   AppLogger._();
 
-  static void debug(String message, {String? name, Object? error, StackTrace? stackTrace}) {
+  static void debug(
+    String message, {
+    String? name,
+    Object? error,
+    StackTrace? stackTrace,
+  }) {
     if (kDebugMode) {
-      developer.log(message, name: name ?? 'DEBUG', error: error, stackTrace: stackTrace, level: 500);
+      developer.log(
+        message,
+        name: name ?? 'DEBUG',
+        error: error,
+        stackTrace: stackTrace,
+        level: 500,
+      );
     }
   }
 
@@ -18,16 +29,37 @@ class AppLogger {
     }
   }
 
-  static void warning(String message, {String? name, Object? error, StackTrace? stackTrace}) {
+  static void warning(
+    String message, {
+    String? name,
+    Object? error,
+    StackTrace? stackTrace,
+  }) {
     if (kDebugMode) {
-      developer.log(message, name: name ?? 'WARNING', error: error, stackTrace: stackTrace, level: 900);
+      developer.log(
+        message,
+        name: name ?? 'WARNING',
+        error: error,
+        stackTrace: stackTrace,
+        level: 900,
+      );
     }
   }
 
-  static void error(String message, {String? name, Object? error, StackTrace? stackTrace}) {
+  static void error(
+    String message, {
+    String? name,
+    Object? error,
+    StackTrace? stackTrace,
+  }) {
     if (kDebugMode) {
-      developer.log(message, name: name ?? 'ERROR', error: error, stackTrace: stackTrace, level: 1000);
+      developer.log(
+        message,
+        name: name ?? 'ERROR',
+        error: error,
+        stackTrace: stackTrace,
+        level: 1000,
+      );
     }
   }
 }
-

@@ -1,11 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-enum DeviceCategory {
-  smallMobile,
-  mediumMobile,
-  largeMobile,
-  tablet,
-}
+enum DeviceCategory { smallMobile, mediumMobile, largeMobile, tablet }
 
 /// Centralized responsive layout utility for the application.
 class ResponsiveUtils {
@@ -62,4 +57,3 @@ class ResponsiveUtils {
     }
   }
 }
-

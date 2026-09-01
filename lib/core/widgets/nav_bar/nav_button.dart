@@ -76,7 +76,8 @@ class NavButton extends StatefulWidget {
   State<NavButton> createState() => _NavButtonState();
 }
 
-class _NavButtonState extends State<NavButton> with SingleTickerProviderStateMixin {
+class _NavButtonState extends State<NavButton>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
   @override
@@ -97,7 +98,8 @@ class _NavButtonState extends State<NavButton> with SingleTickerProviderStateMix
     }
     if (widget.active! && _controller.status != AnimationStatus.completed) {
       _controller.forward();
-    } else if (!widget.active! && _controller.status != AnimationStatus.dismissed) {
+    } else if (!widget.active! &&
+        _controller.status != AnimationStatus.dismissed) {
       _controller.reverse();
     }
   }
@@ -133,10 +135,16 @@ class _NavButtonState extends State<NavButton> with SingleTickerProviderStateMix
               // their nominal range — without clamping, the interpolated
               // width would briefly exceed activeWidth/inactiveWidth, which
               // overflows the Row laid out against that fixed bound.
-              final widthT = (widget.curve ?? Curves.easeInOut).transform(t).clamp(0.0, 1.0);
+              final widthT = (widget.curve ?? Curves.easeInOut)
+                  .transform(t)
+                  .clamp(0.0, 1.0);
               final currentWidth = width == null
                   ? null
-                  : lerpDouble(widget.inactiveWidth ?? width, widget.activeWidth ?? width, widthT);
+                  : lerpDouble(
+                      widget.inactiveWidth ?? width,
+                      widget.activeWidth ?? width,
+                      widthT,
+                    );
 
               // Asymmetric expand/collapse curves, matching google_nav_bar's feel.
               final iconColorT = isActive
@@ -157,7 +165,8 @@ class _NavButtonState extends State<NavButton> with SingleTickerProviderStateMix
               final labelLeftInset = (widget.gap ?? 0) + 8 - (8 * insetT);
               final labelRightInset = 8 * insetT;
 
-              final icon = widget.leading ??
+              final icon =
+                  widget.leading ??
                   Icon(widget.icon, color: iconColor, size: widget.iconSize);
 
               Widget? label;
@@ -172,12 +181,13 @@ class _NavButtonState extends State<NavButton> with SingleTickerProviderStateMix
                         ),
                       )
                     : widget.labelMaxWidth != null
-                        ? ConstrainedBox(
-                            constraints:
-                                BoxConstraints(maxWidth: widget.labelMaxWidth!),
-                            child: widget.text,
-                          )
-                        : widget.text;
+                    ? ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: widget.labelMaxWidth!,
+                        ),
+                        child: widget.text,
+                      )
+                    : widget.text;
 
                 // The label's total footprint (its own width plus both
                 // insets) is driven by the same widthT that shrinks the
@@ -187,8 +197,10 @@ class _NavButtonState extends State<NavButton> with SingleTickerProviderStateMix
                 // icon to visibly snap to center rather than glide there,
                 // since the Row re-centers around whatever children remain.
                 final labelFootprint =
-                    ((widget.fixedLabelWidth ?? 0) + labelLeftInset + labelRightInset) *
-                        widthT;
+                    ((widget.fixedLabelWidth ?? 0) +
+                        labelLeftInset +
+                        labelRightInset) *
+                    widthT;
 
                 label = ClipRect(
                   child: Align(
@@ -228,10 +240,7 @@ class _NavButtonState extends State<NavButton> with SingleTickerProviderStateMix
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    icon,
-                    ?label,
-                  ],
+                  children: [icon, ?label],
                 ),
               );
             },

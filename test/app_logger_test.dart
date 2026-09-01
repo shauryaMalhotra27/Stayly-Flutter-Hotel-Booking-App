@@ -11,4 +11,3 @@ void main() {
     expect(() => AppLogger.error('Error message'), returnsNormally);
   });
 }
-

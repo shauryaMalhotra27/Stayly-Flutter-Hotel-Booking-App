@@ -88,32 +88,34 @@ class CustomNavBar extends StatelessWidget {
         children.add(SizedBox(width: gap));
       }
 
-      children.add(NavTab(
-        key: ValueKey(index),
-        borderRadius: BorderRadius.circular(tabBorderRadius),
-        active: isActive,
-        gap: gap,
-        iconActiveColor: activeColor,
-        iconColor: color,
-        iconSize: iconSize,
-        textColor: activeColor,
-        rippleColor: rippleColor,
-        hoverColor: hoverColor,
-        padding: padding,
-        textStyle: textStyle,
-        text: tab.text,
-        icon: tab.icon,
-        curve: curve,
-        backgroundColor: tabBackgroundColor,
-        inactiveBackgroundColor: tabInactiveBackgroundColor,
-        duration: duration,
-        labelMaxWidth: labelMaxWidth,
-        fixedLabelWidth: fixedLabelWidth,
-        height: height,
-        inactiveWidth: inactiveWidth,
-        activeWidth: activeWidth,
-        onPressed: () => onTabChange?.call(index),
-      ));
+      children.add(
+        NavTab(
+          key: ValueKey(index),
+          borderRadius: BorderRadius.circular(tabBorderRadius),
+          active: isActive,
+          gap: gap,
+          iconActiveColor: activeColor,
+          iconColor: color,
+          iconSize: iconSize,
+          textColor: activeColor,
+          rippleColor: rippleColor,
+          hoverColor: hoverColor,
+          padding: padding,
+          textStyle: textStyle,
+          text: tab.text,
+          icon: tab.icon,
+          curve: curve,
+          backgroundColor: tabBackgroundColor,
+          inactiveBackgroundColor: tabInactiveBackgroundColor,
+          duration: duration,
+          labelMaxWidth: labelMaxWidth,
+          fixedLabelWidth: fixedLabelWidth,
+          height: height,
+          inactiveWidth: inactiveWidth,
+          activeWidth: activeWidth,
+          onPressed: () => onTabChange?.call(index),
+        ),
+      );
     }
 
     return Row(

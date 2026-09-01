@@ -12,10 +12,18 @@ class AppRouter {
   AppRouter._();
 
   static final rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final _dashboardNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'dashboard');
-  static final _hotelNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'hotel');
-  static final _bookingNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'booking');
-  static final _accountNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'account');
+  static final _dashboardNavigatorKey = GlobalKey<NavigatorState>(
+    debugLabel: 'dashboard',
+  );
+  static final _hotelNavigatorKey = GlobalKey<NavigatorState>(
+    debugLabel: 'hotel',
+  );
+  static final _bookingNavigatorKey = GlobalKey<NavigatorState>(
+    debugLabel: 'booking',
+  );
+  static final _accountNavigatorKey = GlobalKey<NavigatorState>(
+    debugLabel: 'account',
+  );
 
   static final GoRouter router = GoRouter(
     navigatorKey: rootNavigatorKey,
@@ -67,4 +75,3 @@ class AppRouter {
     ],
   );
 }
-

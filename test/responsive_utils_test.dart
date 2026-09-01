@@ -24,58 +24,71 @@ void main() {
 
     testWidgets('identifies small mobile correctly', (tester) async {
       DeviceCategory? category;
-      await tester.pumpWidget(buildTestWidget(359, (ctx) {
-        category = ResponsiveUtils.getDeviceCategory(ctx);
-      }));
+      await tester.pumpWidget(
+        buildTestWidget(359, (ctx) {
+          category = ResponsiveUtils.getDeviceCategory(ctx);
+        }),
+      );
       expect(category, equals(DeviceCategory.smallMobile));
     });
 
     testWidgets('identifies medium mobile correctly', (tester) async {
       DeviceCategory? category;
-      await tester.pumpWidget(buildTestWidget(360, (ctx) {
-        category = ResponsiveUtils.getDeviceCategory(ctx);
-      }));
+      await tester.pumpWidget(
+        buildTestWidget(360, (ctx) {
+          category = ResponsiveUtils.getDeviceCategory(ctx);
+        }),
+      );
       expect(category, equals(DeviceCategory.mediumMobile));
 
-      await tester.pumpWidget(buildTestWidget(479, (ctx) {
-        category = ResponsiveUtils.getDeviceCategory(ctx);
-      }));
+      await tester.pumpWidget(
+        buildTestWidget(479, (ctx) {
+          category = ResponsiveUtils.getDeviceCategory(ctx);
+        }),
+      );
       expect(category, equals(DeviceCategory.mediumMobile));
     });
 
     testWidgets('identifies large mobile correctly', (tester) async {
       DeviceCategory? category;
-      await tester.pumpWidget(buildTestWidget(480, (ctx) {
-        category = ResponsiveUtils.getDeviceCategory(ctx);
-      }));
+      await tester.pumpWidget(
+        buildTestWidget(480, (ctx) {
+          category = ResponsiveUtils.getDeviceCategory(ctx);
+        }),
+      );
       expect(category, equals(DeviceCategory.largeMobile));
 
-      await tester.pumpWidget(buildTestWidget(599, (ctx) {
-        category = ResponsiveUtils.getDeviceCategory(ctx);
-      }));
+      await tester.pumpWidget(
+        buildTestWidget(599, (ctx) {
+          category = ResponsiveUtils.getDeviceCategory(ctx);
+        }),
+      );
       expect(category, equals(DeviceCategory.largeMobile));
     });
 
     testWidgets('identifies tablet correctly', (tester) async {
       DeviceCategory? category;
-      await tester.pumpWidget(buildTestWidget(600, (ctx) {
-        category = ResponsiveUtils.getDeviceCategory(ctx);
-      }));
+      await tester.pumpWidget(
+        buildTestWidget(600, (ctx) {
+          category = ResponsiveUtils.getDeviceCategory(ctx);
+        }),
+      );
       expect(category, equals(DeviceCategory.tablet));
     });
 
     testWidgets('valueByDevice falls back correctly', (tester) async {
       String? result;
-      await tester.pumpWidget(buildTestWidget(600, (ctx) {
-        // No tablet or largeMobile value provided, should fall back to mediumMobile
-        result = ResponsiveUtils.valueByDevice<String>(
-          context: ctx,
-          smallMobile: 'small',
-          mediumMobile: 'medium',
-        );
-      }));
+      await tester.pumpWidget(
+        buildTestWidget(600, (ctx) {
+          // No tablet or largeMobile value provided, should fall back to mediumMobile
+          result = ResponsiveUtils.valueByDevice<String>(
+            context: ctx,
+            smallMobile: 'small',
+            mediumMobile: 'medium',
+          );
+        }),
+      );
       expect(result, equals('medium'));
     });
   });
 }
-

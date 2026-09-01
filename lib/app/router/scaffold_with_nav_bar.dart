@@ -6,10 +6,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
   /// The navigation shell and container for the branch Navigators.
   final StatefulNavigationShell navigationShell;
 
-  const ScaffoldWithNavBar({
-    super.key,
-    required this.navigationShell,
-  });
+  const ScaffoldWithNavBar({super.key, required this.navigationShell});
 
   void _onTap(int index) {
     navigationShell.goBranch(
@@ -27,8 +24,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
         currentIndex: navigationShell.currentIndex,
         onTap: _onTap,
       ),
-      extendBody: true, 
+      extendBody: true,
     );
   }
 }
-

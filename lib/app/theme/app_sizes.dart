@@ -9,7 +9,8 @@ class AppSizes {
   // --- MARGINS & PADDING ---
 
   /// Standard horizontal margin for the edges of the screen or major layout components.
-  static double marginHorizontal(BuildContext context) => ResponsiveUtils.valueByDevice(
+  static double marginHorizontal(BuildContext context) =>
+      ResponsiveUtils.valueByDevice(
         context: context,
         smallMobile: 12.0,
         mediumMobile: 16.0,
@@ -18,7 +19,8 @@ class AppSizes {
       );
 
   /// Small padding, typically used for vertical padding inside buttons or cards.
-  static double paddingSmall(BuildContext context) => ResponsiveUtils.valueByDevice(
+  static double paddingSmall(BuildContext context) =>
+      ResponsiveUtils.valueByDevice(
         context: context,
         smallMobile: 10.0,
         mediumMobile: 12.0,
@@ -27,7 +29,8 @@ class AppSizes {
       );
 
   /// Medium padding, typically used for horizontal padding inside buttons or between larger elements.
-  static double paddingMedium(BuildContext context) => ResponsiveUtils.valueByDevice(
+  static double paddingMedium(BuildContext context) =>
+      ResponsiveUtils.valueByDevice(
         context: context,
         smallMobile: 10.0,
         mediumMobile: 14.0,
@@ -36,7 +39,8 @@ class AppSizes {
       );
 
   /// Compact horizontal padding for tight multi-item rows (e.g. bottom nav tabs).
-  static double paddingCompact(BuildContext context) => ResponsiveUtils.valueByDevice(
+  static double paddingCompact(BuildContext context) =>
+      ResponsiveUtils.valueByDevice(
         context: context,
         smallMobile: 8.0,
         mediumMobile: 10.0,
@@ -45,7 +49,8 @@ class AppSizes {
       );
 
   /// Small spacing/gap, typically used between an icon and its text.
-  static double spacingSmall(BuildContext context) => ResponsiveUtils.valueByDevice(
+  static double spacingSmall(BuildContext context) =>
+      ResponsiveUtils.valueByDevice(
         context: context,
         smallMobile: 4.0,
         mediumMobile: 6.0,
@@ -56,7 +61,8 @@ class AppSizes {
   // --- ICONS ---
 
   /// Standard medium icon size.
-  static double iconMedium(BuildContext context) => ResponsiveUtils.valueByDevice(
+  static double iconMedium(BuildContext context) =>
+      ResponsiveUtils.valueByDevice(
         context: context,
         smallMobile: 20.0,
         mediumMobile: 22.0,
@@ -67,7 +73,8 @@ class AppSizes {
   // --- TEXT SIZES ---
 
   /// Small text size, typically used for navigation labels or secondary captions.
-  static double textSmall(BuildContext context) => ResponsiveUtils.valueByDevice(
+  static double textSmall(BuildContext context) =>
+      ResponsiveUtils.valueByDevice(
         context: context,
         smallMobile: 12.0,
         mediumMobile: 14.0,
@@ -75,4 +82,3 @@ class AppSizes {
         tablet: 16.0,
       );
 }
-

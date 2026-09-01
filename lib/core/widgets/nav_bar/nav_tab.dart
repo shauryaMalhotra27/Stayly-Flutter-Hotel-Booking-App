@@ -108,7 +108,9 @@ class NavTab extends StatelessWidget {
           text,
           overflow: TextOverflow.ellipsis,
           softWrap: false,
-          style: textStyle ?? TextStyle(fontWeight: FontWeight.w600, color: textColor),
+          style:
+              textStyle ??
+              TextStyle(fontWeight: FontWeight.w600, color: textColor),
         ),
       ),
     );
