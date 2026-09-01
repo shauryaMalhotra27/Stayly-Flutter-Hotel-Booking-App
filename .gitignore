@@ -118,3 +118,12 @@ app.*.symbols
 
 # FVM Version Cache
 .fvm/
+# Figma Analysis Files
+figma_data.json
+figma_test.json
+figma_analysis.md
+parse_figma.py
+.DS_Store
+
+# IDE
+.idea/
