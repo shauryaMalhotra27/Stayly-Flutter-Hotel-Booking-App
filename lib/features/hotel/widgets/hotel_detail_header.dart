@@ -79,23 +79,15 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
                       layoutBuilder: (currentChild, previousChildren) {
                         return Stack(
                           fit: StackFit.expand,
-                          children: [
-                            ...previousChildren,
-                            ?currentChild,
-                          ],
+                          children: [...previousChildren, ?currentChild],
                         );
                       },
                       transitionBuilder: (child, animation) {
-                        return FadeTransition(
-                          opacity: animation,
-                          child: child,
-                        );
+                        return FadeTransition(opacity: animation, child: child);
                       },
                       child: Image.asset(
                         gallery[_currentPage],
-                        key: ValueKey(
-                          '${hotel.id}_${gallery[_currentPage]}',
-                        ),
+                        key: ValueKey('${hotel.id}_${gallery[_currentPage]}'),
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,

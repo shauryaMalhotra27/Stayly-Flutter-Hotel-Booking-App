@@ -31,9 +31,7 @@ class SurfaceCard extends StatelessWidget {
         borderRadius: borderRadius,
         side: BorderSide(color: borderColor),
       ),
-      child: padding == null
-          ? child
-          : Padding(padding: padding!, child: child),
+      child: padding == null ? child : Padding(padding: padding!, child: child),
     );
   }
 }

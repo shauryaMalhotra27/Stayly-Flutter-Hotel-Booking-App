@@ -31,14 +31,11 @@ class CircleIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (style == CircleIconButtonStyle.frosted) {
-      return _FrostedCircle(
-        size: size,
-        onTap: onTap,
-        child: child!,
-      );
+      return _FrostedCircle(size: size, onTap: onTap, child: child!);
     }
 
-    final icon = child ??
+    final icon =
+        child ??
         Transform.scale(
           scale: svgScale,
           child: SvgPicture.asset(
@@ -70,11 +67,7 @@ class CircleIconButton extends StatelessWidget {
 }
 
 class _FrostedCircle extends StatelessWidget {
-  const _FrostedCircle({
-    required this.size,
-    required this.child,
-    this.onTap,
-  });
+  const _FrostedCircle({required this.size, required this.child, this.onTap});
 
   final double size;
   final Widget child;
