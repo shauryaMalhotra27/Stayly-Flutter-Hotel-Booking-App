@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/widgets/app_background.dart';
+import '../../../l10n/app_strings.dart';
 
 class BookingView extends StatelessWidget {
   const BookingView({super.key});
@@ -9,8 +10,8 @@ class BookingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: const AppBackground(
-        child: Center(child: Text('Booking Placeholder')),
+      body: AppBackground(
+        child: Center(child: Text(AppStrings.current.bookingPlaceholder)),
       ),
     );
   }

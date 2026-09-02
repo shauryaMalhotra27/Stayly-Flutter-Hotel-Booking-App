@@ -127,3 +127,5 @@ parse_figma.py
 
 # IDE
 .idea/
+.cursor/
+*.iml

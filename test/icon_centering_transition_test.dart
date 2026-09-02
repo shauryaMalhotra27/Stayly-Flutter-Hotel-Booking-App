@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_hotel_booking_app/core/widgets/custom_bottom_navigation_bar.dart';
+import 'package:flutter_hotel_booking_app/l10n/app_strings.dart';
 
 void main() {
   testWidgets(
     'icon glides to center instead of snapping when a tab goes active -> inactive',
     (tester) async {
-      // Previously, the label was removed from the Row the instant its
-      // opacity/width animation reached t == 0, which caused the Row to
-      // suddenly re-center around the icon alone — visible as the icon
-      // sitting at the far left of its circle for most of the shrink, then
-      // snapping to center in a single frame right at the end. The label
-      // must instead shrink its own footprint to exactly 0 in step with the
-      // container, so the icon's position moves continuously throughout.
       int currentIndex = 1;
       await tester.pumpWidget(
         MaterialApp(
@@ -28,9 +23,13 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byIcon(Icons.home_outlined).first);
+      await tester.tap(find.bySemanticsLabel(AppStrings.current.navDashboard));
 
-      final iconFinder = find.byIcon(Icons.flight_takeoff_outlined);
+      // Hotels tab is ValueKey(1); track its SVG while the pill shrinks.
+      final iconFinder = find.descendant(
+        of: find.byKey(const ValueKey(1)),
+        matching: find.byType(SvgPicture),
+      );
       double? previousRelativeX;
       var maxJump = 0.0;
 
@@ -56,9 +55,6 @@ void main() {
         previousRelativeX = relativeX;
       }
 
-      // A smooth transition moves a fraction of a pixel per frame; the old
-      // bug produced a single ~18px jump in one frame. 5px is a generous
-      // threshold that still clearly fails on the old snap-to-center bug.
       expect(
         maxJump,
         lessThan(5.0),

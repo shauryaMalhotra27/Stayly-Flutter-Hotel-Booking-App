@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../app/theme/app_colors.dart';
+import '../../app/theme/app_icons.dart';
+import '../../app/theme/app_images.dart';
 import '../../app/theme/app_sizes.dart';
 import '../../app/theme/app_typography.dart';
+import '../../l10n/app_strings.dart';
 import 'nav_bar/nav_bar.dart';
 
 /// Precomputed, screen-size-aware layout numbers for [CustomBottomNavigationBar].
@@ -22,6 +26,8 @@ class _NavBarMetrics {
     required this.barWidth,
     required this.fixedLabelWidth,
     required this.activeWidth,
+    required this.avatarActiveWidth,
+    required this.avatarLabelWidth,
   });
 
   final double scale;
@@ -35,6 +41,12 @@ class _NavBarMetrics {
   final double barWidth;
   final double fixedLabelWidth;
   final double activeWidth;
+
+  /// Wider pill for the account tab so the avatar can stay large.
+  final double avatarActiveWidth;
+
+  /// Account's own (shorter) label slot — not the longest nav label.
+  final double avatarLabelWidth;
 
   /// Reference phone width AppSizes' medium-mobile tier is tuned for.
   static const double _baselineWidth = 390.0;
@@ -63,7 +75,7 @@ class _NavBarMetrics {
         : _scaleCapWidth;
     final scale = (effectiveWidth / _baselineWidth).clamp(_minScale, _maxScale);
 
-    final iconSize = AppSizes.iconMedium(context) * scale;
+    final iconSize = AppSizes.navIcon(context) * scale;
     final tabPadding = AppSizes.paddingCompact(context) * scale;
     final gap = AppSizes.spacingSmall(context) * scale;
     final textStyle = TextStyle(
@@ -72,35 +84,61 @@ class _NavBarMetrics {
       color: Colors.white,
       fontWeight: AppTypography.semiBold,
     );
-    final barInnerPadding = 8.0 * scale;
+    final barInnerPadding = 4.0 * scale;
     final verticalPadding = AppSizes.paddingSmall(context) * scale;
-    final pillHeight = iconSize + 2 * verticalPadding;
+    final pillHeight = iconSize + 2.8 * verticalPadding;
     final barWidth = (screenWidth * _barWidthFraction).clamp(0.0, _barWidthCap);
 
-    // Budget the label width against what the bar can fit: 3 inactive
-    // circles + the active tab's icon/padding, so it falls back to ellipsis
-    // instead of overflowing. Clamped to non-negative since MediaQuery can
-    // briefly report width 0 on first build.
     final rowWidth = (barWidth - 2 * barInnerPadding).clamp(
       0.0,
       double.infinity,
     );
     final inactiveTabWidth = pillHeight; // must equal height for a true circle
-    // NavButton insets the label by (gap) on the left and a fixed 8px on the
-    // right (see labelLeftInset/labelRightInset), beyond fixedLabelWidth
-    // itself — both must be counted here or the pill is sized short of what
-    // it actually renders.
     const labelRightInset = 8.0;
+    const safetyMargin = 20.0;
+
+    // SVG tabs: budget labels against iconSize so long titles stay full.
     final activeIconAndPadding =
         iconSize + 2 * tabPadding + gap + labelRightInset;
-    const safetyMargin = 20.0; // buffer against layout rounding
     final reserved = 3 * inactiveTabWidth + activeIconAndPadding + safetyMargin;
     final fixedLabelWidth = _longestLabelWidth(
       items,
       textStyle,
     ).clamp(0.0, (rowWidth - reserved).clamp(0.0, rowWidth));
     final activeWidth =
-        iconSize + gap + fixedLabelWidth + labelRightInset + 2 * tabPadding;
+        iconSize +
+        gap +
+        fixedLabelWidth +
+        labelRightInset +
+        2 * tabPadding +
+        1.0;
+
+    // Account tab: its own wider pill (large avatar + short "Account" label)
+    // so SVG tabs keep full text while the photo can stay big.
+    NavBarItem? avatarItem;
+    for (final item in items) {
+      if (item.fillsInactiveCircle) {
+        avatarItem = item;
+        break;
+      }
+    }
+    final avatarScale = avatarItem?.activeIconScale ?? 1.0;
+    final avatarLeading = (iconSize * avatarScale)
+        .clamp(iconSize, pillHeight)
+        .toDouble();
+    final avatarLabelWidth = avatarItem == null
+        ? fixedLabelWidth
+        : _labelWidth(avatarItem.text, textStyle).clamp(0.0, fixedLabelWidth);
+    final maxAvatarPill = (rowWidth - 3 * inactiveTabWidth - safetyMargin)
+        .clamp(0.0, rowWidth);
+    final avatarActiveWidth =
+        (avatarLeading +
+                gap +
+                avatarLabelWidth +
+                labelRightInset +
+                2 * tabPadding +
+                1.0)
+            .clamp(0.0, maxAvatarPill);
 
     return _NavBarMetrics(
       scale: scale,
@@ -114,24 +152,28 @@ class _NavBarMetrics {
       barWidth: barWidth,
       fixedLabelWidth: fixedLabelWidth,
       activeWidth: activeWidth,
+      avatarActiveWidth: avatarActiveWidth,
+      avatarLabelWidth: avatarLabelWidth,
     );
+  }
+
+  static double _labelWidth(String text, TextStyle style) {
+    final painter = TextPainter(
+      text: TextSpan(text: text, style: style),
+      textDirection: TextDirection.ltr,
+      maxLines: 1,
+    )..layout();
+    return painter.width + 4.0;
   }
 
   /// Widest label's natural width, so every active pill can share one fixed width.
   static double _longestLabelWidth(List<NavBarItem> items, TextStyle style) {
     var maxWidth = 0.0;
     for (final item in items) {
-      final painter = TextPainter(
-        text: TextSpan(text: item.text, style: style),
-        textDirection: TextDirection.ltr,
-        maxLines: 1,
-      )..layout();
-      if (painter.width > maxWidth) {
-        maxWidth = painter.width;
-      }
+      final width = _labelWidth(item.text, style);
+      if (width > maxWidth) maxWidth = width;
     }
-    // Small buffer so layout rounding doesn't tip ellipsis into truncating.
-    return maxWidth + 4.0;
+    return maxWidth;
   }
 }
 
@@ -145,16 +187,47 @@ class CustomBottomNavigationBar extends StatelessWidget {
     required this.onTap,
   });
 
-  static const List<NavBarItem> _items = [
-    NavBarItem(icon: Icons.home_outlined, text: 'Dashboard'),
-    NavBarItem(icon: Icons.flight_takeoff_outlined, text: 'Hotels Resort'),
-    NavBarItem(icon: Icons.calendar_today_outlined, text: 'Booking Hotel'),
-    NavBarItem(icon: Icons.person_outline, text: 'Account'),
-  ];
+  static List<NavBarItem> _navItems() {
+    final s = AppStrings.current;
+    return [
+      NavBarItem(
+        text: s.navDashboard,
+        iconBuilder: (color, size) => _NavSvg(AppIcons.home, color, size),
+      ),
+      NavBarItem(
+        text: s.navHotelsResort,
+        iconBuilder: (color, size) => _NavSvg(AppIcons.flight, color, size),
+      ),
+      NavBarItem(
+        text: s.navBookingHotel,
+        iconBuilder: (color, size) => _NavSvg(AppIcons.calendar, color, size),
+      ),
+      NavBarItem(
+        text: s.navAccount,
+        fillsInactiveCircle: true,
+        // Raise this to enlarge the photo in the active pill (1.0 = SVG size).
+        activeIconScale: 2,
+        iconBuilder: (color, size) => SizedBox(
+          width: size,
+          height: size,
+          child: ClipOval(
+            child: Image.asset(
+              AppImages.user,
+              fit: BoxFit.cover,
+              width: size,
+              height: size,
+              gaplessPlayback: true,
+            ),
+          ),
+        ),
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
-    final m = _NavBarMetrics.of(context, _items);
+    final items = _navItems();
+    final m = _NavBarMetrics.of(context, items);
 
     return SafeArea(
       child: Align(
@@ -181,7 +254,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               vertical: m.barInnerPadding,
             ),
             child: CustomNavBar(
-              tabs: _items,
+              tabs: items,
               selectedIndex: currentIndex,
               onTabChange: onTap,
               gap: m.gap,
@@ -193,20 +266,41 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 horizontal: m.tabPadding,
                 vertical: m.verticalPadding,
               ),
-              duration: const Duration(milliseconds: 1000),
+              duration: const Duration(milliseconds: 700),
               tabBackgroundColor: AppColors.primary,
-              tabInactiveBackgroundColor: Colors.white.withAlpha(15),
+              tabInactiveBackgroundColor: AppColors.navInactive,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               expandRow: true,
               fixedLabelWidth: m.fixedLabelWidth,
+              avatarLabelWidth: m.avatarLabelWidth,
               inactiveWidth: m.pillHeight,
               activeWidth: m.activeWidth,
+              avatarActiveWidth: m.avatarActiveWidth,
               curve: Curves.elasticInOut,
               height: m.pillHeight,
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Tinted SVG for the first three nav tabs (Figma 24×24 baseline).
+class _NavSvg extends StatelessWidget {
+  const _NavSvg(this.asset, this.color, this.size);
+
+  final String asset;
+  final Color color;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      asset,
+      width: size,
+      height: size,
+      colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
     );
   }
 }
