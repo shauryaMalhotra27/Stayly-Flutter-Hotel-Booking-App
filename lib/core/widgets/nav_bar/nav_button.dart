@@ -13,6 +13,9 @@ class NavButton extends StatefulWidget {
     super.key,
     this.icon,
     this.iconSize,
+    this.iconBuilder,
+    this.fillsInactiveCircle = false,
+    this.activeIconScale = 1.0,
     this.leading,
     this.iconActiveColor,
     this.iconColor,
@@ -35,12 +38,18 @@ class NavButton extends StatefulWidget {
     this.height,
     this.inactiveWidth,
     this.activeWidth,
-  });
+  }) : assert(icon != null || iconBuilder != null || leading != null);
 
   final IconData? icon;
   final double? iconSize;
   final Text? text;
   final Widget? leading;
+  /// Builds the icon with the animated color each frame (SVG / avatar).
+  final Widget Function(Color color, double size)? iconBuilder;
+  /// Avatar: expand to the inactive circle diameter instead of iconSize.
+  final bool fillsInactiveCircle;
+  /// Multiplier on iconSize when selected (avatars often want > 1).
+  final double activeIconScale;
   final Color? iconActiveColor;
   final Color? iconColor;
   final Color? color;
@@ -165,12 +174,57 @@ class _NavButtonState extends State<NavButton>
               final labelLeftInset = (widget.gap ?? 0) + 8 - (8 * insetT);
               final labelRightInset = 8 * insetT;
 
+              // Lerp padding with width — jumping padding on/off when
+              // isActive flips overflows the Row mid-animation.
+              final EdgeInsets endPadding = (widget.padding is EdgeInsets
+                      ? widget.padding as EdgeInsets
+                      : EdgeInsets.zero);
+              // Tighter vertical inset so a scaled-up avatar still fits the pill.
+              final effectiveEndPadding = widget.fillsInactiveCircle
+                  ? EdgeInsets.fromLTRB(
+                      endPadding.left * 0.6,
+                      endPadding.top * 0.2,
+                      endPadding.right,
+                      endPadding.bottom * 0.2,
+                    )
+                  : endPadding;
+              final resolvedPadding =
+                  EdgeInsets.lerp(EdgeInsets.zero, effectiveEndPadding, widthT) ??
+                  EdgeInsets.zero;
+
+              final hasLabel = widget.text != null && widget.text!.data != '';
+              final labelFootprint = hasLabel
+                  ? ((widget.fixedLabelWidth ?? 0) +
+                            labelLeftInset +
+                            labelRightInset) *
+                        widthT
+                  : 0.0;
+
+              final baseSize = widget.iconSize ?? 24;
+              final diameter = widget.height ?? baseSize;
+              final activeSize = (baseSize * widget.activeIconScale)
+                  .clamp(baseSize, diameter);
+              var size = widget.fillsInactiveCircle
+                  ? (lerpDouble(diameter, activeSize, widthT) ?? activeSize)
+                  : baseSize;
+              // Keep the icon inside the padded width so mid-animation
+              // never trips a RenderFlex overflow.
+              if (currentWidth != null) {
+                final maxIcon =
+                    (currentWidth -
+                            resolvedPadding.horizontal -
+                            labelFootprint)
+                        .clamp(0.0, double.infinity);
+                if (size > maxIcon) size = maxIcon;
+              }
+
+              final resolvedColor = iconColor ?? Colors.white;
               final icon =
                   widget.leading ??
-                  Icon(widget.icon, color: iconColor, size: widget.iconSize);
+                  widget.iconBuilder?.call(resolvedColor, size) ??
+                  Icon(widget.icon, color: resolvedColor, size: size);
 
               Widget? label;
-              final hasLabel = widget.text != null && widget.text!.data != '';
               if (hasLabel) {
                 final text = widget.fixedLabelWidth != null
                     ? SizedBox(
@@ -196,12 +250,6 @@ class _NavButtonState extends State<NavButton>
                 // instant t hits 0 — that abrupt removal was what caused the
                 // icon to visibly snap to center rather than glide there,
                 // since the Row re-centers around whatever children remain.
-                final labelFootprint =
-                    ((widget.fixedLabelWidth ?? 0) +
-                        labelLeftInset +
-                        labelRightInset) *
-                    widthT;
-
                 label = ClipRect(
                   child: Align(
                     alignment: Alignment.centerLeft,
@@ -228,13 +276,23 @@ class _NavButtonState extends State<NavButton>
                 );
               }
 
+              // Hide the gray ring behind a full-bleed avatar.
+              final bgColor = widget.fillsInactiveCircle && widthT < 0.5
+                  ? Color.lerp(
+                      Colors.transparent,
+                      widget.color,
+                      widthT * 2,
+                    )
+                  : Color.lerp(widget.inactiveColor, widget.color, t);
+
               return Container(
                 width: currentWidth,
                 height: widget.height,
-                padding: isActive ? widget.padding : EdgeInsets.zero,
+                padding: resolvedPadding,
                 alignment: Alignment.center,
+                clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
-                  color: Color.lerp(widget.inactiveColor, widget.color, t),
+                  color: bgColor,
                   borderRadius: widget.borderRadius,
                 ),
                 child: Row(

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show HapticFeedback;
 
+import 'nav_bar.dart';
 import 'nav_button.dart';
 
 class NavTab extends StatelessWidget {
@@ -12,7 +13,10 @@ class NavTab extends StatelessWidget {
     this.haptic = true,
     this.backgroundColor,
     this.inactiveBackgroundColor,
-    required this.icon,
+    this.icon,
+    this.iconBuilder,
+    this.fillsInactiveCircle = false,
+    this.activeIconScale = 1.0,
     this.iconColor,
     this.rippleColor,
     this.hoverColor,
@@ -33,7 +37,7 @@ class NavTab extends StatelessWidget {
     this.height,
     this.inactiveWidth,
     this.activeWidth,
-  });
+  }) : assert(icon != null || iconBuilder != null);
 
   final bool? active;
   final bool haptic;
@@ -49,7 +53,10 @@ class NavTab extends StatelessWidget {
   final double? iconSize;
   final VoidCallback? onPressed;
   final String text;
-  final IconData icon;
+  final IconData? icon;
+  final NavIconBuilder? iconBuilder;
+  final bool fillsInactiveCircle;
+  final double activeIconScale;
   final Color? backgroundColor;
   final Color? inactiveBackgroundColor;
   final Duration? duration;
@@ -77,8 +84,12 @@ class NavTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // excludeSemantics: the visible label Text would otherwise merge and
+    // duplicate this label ("Dashboard\nDashboard"), breaking finders/a11y.
     return Semantics(
       label: text,
+      button: true,
+      excludeSemantics: true,
       child: NavButton(
         borderRadius: borderRadius,
         duration: duration,
@@ -99,6 +110,9 @@ class NavTab extends StatelessWidget {
         iconActiveColor: iconActiveColor,
         iconColor: iconColor,
         icon: icon,
+        iconBuilder: iconBuilder,
+        fillsInactiveCircle: fillsInactiveCircle,
+        activeIconScale: activeIconScale,
         labelMaxWidth: labelMaxWidth,
         fixedLabelWidth: fixedLabelWidth,
         height: height,
