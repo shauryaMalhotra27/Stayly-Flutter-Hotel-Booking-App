@@ -2,7 +2,7 @@
 
 Flutter assignment: a mobile hotel-booking UI implemented from the provided Figma design (dashboard, hotels, booking calendar, account, and side menu).
 
-The app is branded as **Stayly**, with a custom launcher icon and native splash screen. It is a **mobile-first Flutter / Dart** client with pixel-accurate layout, reusable widgets, and the interactions shown in the prototype.
+The app is branded as **Stayly**, with a custom launcher icon and native splash screen. It is a **mobile-first Flutter / Dart** client with pixel-accurate layout, reusable widgets, responsive sizing and the interactions shown in the prototype.
 
 Demo catalog: **5 properties** (Toronto, Bali, Santorini, Kyoto, Maldives), each with its own photo gallery.
 
@@ -128,6 +128,7 @@ Hotel data, images, fonts, and icons live in the repo (`assets/`). There is no b
 - **Side menu** — profile header and menu rows from the hamburger control; options that are UI-only in the design show Coming Soon.
 - **Bottom navigation** — four tabs with the Figma pill/selection animation.
 - **Back navigation** — system back closes the side menu if it is open; otherwise the first press shows a “Press back again to exit” hint, and a second press within 2 seconds exits the app.
+- **Responsive layout** — width-based scale and device tiers (small / medium / large phone) and safe areas.
 
 Design tokens (colors, type, spacing, icons) live under `lib/app/theme/`. Screens are split by feature under `lib/features/`.
 
