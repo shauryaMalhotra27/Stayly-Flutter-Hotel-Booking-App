@@ -7,6 +7,7 @@ abstract class AppStrings {
   // App
   String get appTitle;
   String get userDisplayName;
+  String get pressBackAgainToExit;
 
   // Time-based greeting prefixes (name appended by [greetingForNow]).
   String get goodMorning;
@@ -45,6 +46,43 @@ abstract class AppStrings {
   // Placeholders
   String get accountPlaceholder;
   String get bookingPlaceholder;
+
+  // Booking
+  String get cancelDate;
+  String get selectDatesHint;
+  String nightStay(int nights);
+
+  // Account menu
+  String get editProfile;
+  String get editProfileSubtitle;
+  String get accountSettings;
+  String get accountSettingsSubtitle;
+  String get notification;
+  String get notificationSubtitle;
+  String get appearance;
+  String get appearanceSubtitle;
+  String get helpAndFeedback;
+  String get helpAndFeedbackSubtitle;
+  String get inviteFriend;
+  String get inviteFriendSubtitle;
+  String get privacySecurity;
+  String get privacySecuritySubtitle;
+  String get subscription;
+  String get subscriptionSubtitle;
+  String get comingSoonBadge;
+
+  // Side menu drawer
+  String get sideMenuProfileName;
+  String get sideMenuProfileLocation;
+  String get sideMenuSectionTitle;
+  String get sideMenuPayment;
+  String get sideMenuTranslate;
+  String get sideMenuPrivacy;
+  String get sideMenuListing;
+  String get sideMenuHost;
+  String get sideMenuDarkMode;
+  String get sideMenuUpdate;
+  String get sideMenuNotificationBadge;
 
   /// "Good Morning Prabhat" based on local time.
   String greetingForNow({DateTime? now, String? name}) {

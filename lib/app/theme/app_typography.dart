@@ -201,4 +201,199 @@ class AppTypography {
       color: AppColors.textMuted,
     );
   }
+
+  /// Booking stay title — same size as greeting, Bold.
+  static TextStyle bookingStayTitle(
+    BuildContext context, {
+    required double scale,
+  }) {
+    final size = AppSizes.textGreeting(context) * scale;
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: size,
+      fontWeight: semiBold,
+      height: 43 / 35,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  /// Booking date range subtitle — Figma ~16 Regular, secondary white.
+  static TextStyle bookingDateRange(
+    BuildContext context, {
+    required double scale,
+  }) {
+    final size = AppSizes.textAddress(context) * scale;
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: size,
+      fontWeight: regular,
+      height: 22 / 16,
+      color: AppColors.textSecondary,
+    );
+  }
+
+  /// Booking cancel action — Figma Bold 18, #FF8000.
+  static TextStyle bookingCancelDate(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: AppSizes.textSectionTitle(context) * scale,
+      fontWeight: bold,
+      letterSpacing: 0.015 * 18,
+      color: AppColors.cancelDate,
+    );
+  }
+
+  /// Booking month label — Figma Medium 18 centered.
+  static TextStyle bookingMonthLabel(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: AppSizes.textSectionTitle(context) * scale,
+      fontWeight: medium,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  /// Booking day cell — Figma Inter Regular 16 @ 80% white.
+  static TextStyle bookingDayCell(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: 'Inter',
+      fontSize: AppSizes.textMetaValue(context) * scale,
+      fontWeight: regular,
+      color: AppColors.textPrimaryDark.withValues(alpha: 0.8),
+    );
+  }
+
+  /// SF Pro on Apple; falls back to system sans elsewhere.
+  static const String sfProFamily = '.SF Pro Text';
+  static const List<String> sfProFallback = [
+    'SF Pro Text',
+    'SFProText',
+    'Helvetica Neue',
+    'Roboto',
+  ];
+
+  /// Account menu title — Figma Nohemi SemiBold 15, tracking 1.5%.
+  static TextStyle accountMenuTitle(
+    BuildContext context, {
+    required double scale,
+  }) {
+    final size = AppSizes.textAccountTitle(context) * scale;
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: size,
+      fontWeight: semiBold,
+      letterSpacing: 0.015 * 15,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  /// Account menu subtitle — Figma SF Pro Regular 12 @ 68% white.
+  static TextStyle accountMenuSubtitle(
+    BuildContext context, {
+    required double scale,
+  }) {
+    final size = AppSizes.textAccountSubtitle(context) * scale;
+    return TextStyle(
+      fontFamily: sfProFamily,
+      fontFamilyFallback: sfProFallback,
+      fontSize: size,
+      fontWeight: regular,
+      color: AppColors.textSecondary,
+    );
+  }
+
+  /// Subscription badge — Figma SF Pro Bold ~10, accent orange.
+  static TextStyle accountComingSoonBadge(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: sfProFamily,
+      fontFamilyFallback: sfProFallback,
+      fontSize: 10 * scale,
+      fontWeight: bold,
+      height: 16.55 / 9.93,
+      color: AppColors.accentOrange,
+    );
+  }
+
+  /// Side menu profile name — Figma Nohemi Medium 22.
+  static TextStyle sideMenuProfileName(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 18 * scale,
+      fontWeight: medium,
+      color: AppColors.textPrimaryDark,
+      decoration: TextDecoration.none,
+    );
+  }
+
+  /// Side menu location — Figma Nohemi Regular 14 @ 68% white.
+  static TextStyle sideMenuProfileLocation(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 14 * scale,
+      fontWeight: regular,
+      color: AppColors.textSecondary,
+      decoration: TextDecoration.none,
+    );
+  }
+
+  /// Side menu section label — Figma Nohemi SemiBold 15 @ 80% white.
+  static TextStyle sideMenuSectionLabel(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 15 * scale,
+      fontWeight: semiBold,
+      color: AppColors.textPrimaryDark.withValues(alpha: 0.8),
+      decoration: TextDecoration.none,
+    );
+  }
+
+  /// Side menu item label — Figma Nohemi Regular 18 @ 68% white.
+  static TextStyle sideMenuItemLabel(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 18 * scale,
+      fontWeight: regular,
+      color: AppColors.textSecondary,
+      decoration: TextDecoration.none,
+    );
+  }
+
+  /// Side menu notification badge — Figma SF Pro Regular, compact pill.
+  static TextStyle sideMenuBadge(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: sfProFamily,
+      fontFamilyFallback: sfProFallback,
+      fontSize: 12 * scale,
+      fontWeight: regular,
+      height: 1,
+      color: AppColors.textPrimaryDark,
+    );
+  }
 }

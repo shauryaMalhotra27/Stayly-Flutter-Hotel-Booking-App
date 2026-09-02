@@ -3,7 +3,10 @@ import 'app_strings.dart';
 /// English UI strings. Add `hi_strings.dart` (etc.) later for other locales.
 class EnStrings extends AppStrings {
   @override
-  String get appTitle => 'Hotel Booking App';
+  String get appTitle => 'Stayly';
+
+  @override
+  String get pressBackAgainToExit => 'Press back again to exit';
 
   @override
   String get userDisplayName => 'Prabhat';
@@ -81,4 +84,98 @@ class EnStrings extends AppStrings {
 
   @override
   String get bookingPlaceholder => 'Booking Placeholder';
+
+  @override
+  String get cancelDate => 'Cancel Date';
+
+  @override
+  String get selectDatesHint => 'Select dates';
+
+  @override
+  String nightStay(int nights) =>
+      nights == 1 ? '1-night stay' : '$nights-night stay';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get editProfileSubtitle => 'Manage your professional profile';
+
+  @override
+  String get accountSettings => 'Account';
+
+  @override
+  String get accountSettingsSubtitle => 'Manage account and login settings';
+
+  @override
+  String get notification => 'Notification';
+
+  @override
+  String get notificationSubtitle => 'Manage your notification preferences';
+
+  @override
+  String get appearance => 'Appearance';
+
+  @override
+  String get appearanceSubtitle => 'Customize your app experience';
+
+  @override
+  String get helpAndFeedback => 'Help & Feedback';
+
+  @override
+  String get helpAndFeedbackSubtitle => 'Get help or share feedback';
+
+  @override
+  String get inviteFriend => 'Invite a friend';
+
+  @override
+  String get inviteFriendSubtitle => 'Invite friends to NextRole.app';
+
+  @override
+  String get privacySecurity => 'Privacy & Security';
+
+  @override
+  String get privacySecuritySubtitle => 'Manage privacy and data settings';
+
+  @override
+  String get subscription => 'Subscription';
+
+  @override
+  String get subscriptionSubtitle => 'Manage your plan and billing';
+
+  @override
+  String get comingSoonBadge => 'Coming Soon';
+
+  @override
+  String get sideMenuProfileName => 'Alice Premium';
+
+  @override
+  String get sideMenuProfileLocation => 'Toronto, Canada';
+
+  @override
+  String get sideMenuSectionTitle => 'Account Setting';
+
+  @override
+  String get sideMenuPayment => 'Payment';
+
+  @override
+  String get sideMenuTranslate => 'Translate';
+
+  @override
+  String get sideMenuPrivacy => 'Privacy';
+
+  @override
+  String get sideMenuListing => 'Listing';
+
+  @override
+  String get sideMenuHost => 'Host';
+
+  @override
+  String get sideMenuDarkMode => 'Dark Mode';
+
+  @override
+  String get sideMenuUpdate => 'Update';
+
+  @override
+  String get sideMenuNotificationBadge => '12';
 }

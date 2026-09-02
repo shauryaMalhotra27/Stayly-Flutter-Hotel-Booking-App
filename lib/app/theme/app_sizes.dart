@@ -85,10 +85,10 @@ class AppSizes {
   static double menuButtonSize(BuildContext context) =>
       ResponsiveUtils.valueByDevice(
         context: context,
-        smallMobile: 52.0,
-        mediumMobile: 60.0,
-        largeMobile: 69.0,
-        tablet: 72.0,
+        smallMobile: 48.0,
+        mediumMobile: 52.0,
+        largeMobile: 60.0,
+        tablet: 64.0,
       );
 
   static double cardRadius(BuildContext context) =>
@@ -109,15 +109,25 @@ class AppSizes {
         tablet: 54.0,
       );
 
-  /// Bottom clearance so scroll content clears the floating nav.
-  static double navClearance(BuildContext context) =>
-      ResponsiveUtils.valueByDevice(
-        context: context,
-        smallMobile: 100.0,
-        mediumMobile: 110.0,
-        largeMobile: 120.0,
-        tablet: 130.0,
-      );
+  /// Bottom clearance so scroll content clears the floating nav + system inset.
+  ///
+  /// Uses [MediaQuery.viewPadding] (not [MediaQuery.padding]): with
+  /// [Scaffold.extendBody], padding.bottom is inflated to the bottom bar's
+  /// laid-out height, which can be nearly full-screen and zero out Column
+  /// layouts (e.g. Booking).
+  static double navClearance(BuildContext context) {
+    final bottomInset = MediaQuery.viewPaddingOf(context).bottom;
+    // Bar block: pill + vertical margins/padding (excludes system inset).
+    final barBlock = ResponsiveUtils.valueByDevice(
+      context: context,
+      smallMobile: 88.0,
+      mediumMobile: 92.0,
+      largeMobile: 96.0,
+      tablet: 104.0,
+    );
+    // Extra gap so the last row sits clearly above the pill.
+    return barBlock + bottomInset + 24.0;
+  }
 
   // --- ICONS ---
 
@@ -238,5 +248,25 @@ class AppSizes {
         mediumMobile: 15.0,
         largeMobile: 16.0,
         tablet: 17.0,
+      );
+
+  /// Account menu title — Figma 15 SemiBold.
+  static double textAccountTitle(BuildContext context) =>
+      ResponsiveUtils.valueByDevice(
+        context: context,
+        smallMobile: 13.0,
+        mediumMobile: 14.0,
+        largeMobile: 15.0,
+        tablet: 16.0,
+      );
+
+  /// Account menu subtitle — Figma 12 Regular (SF Pro).
+  static double textAccountSubtitle(BuildContext context) =>
+      ResponsiveUtils.valueByDevice(
+        context: context,
+        smallMobile: 11.0,
+        mediumMobile: 11.0,
+        largeMobile: 12.0,
+        tablet: 13.0,
       );
 }

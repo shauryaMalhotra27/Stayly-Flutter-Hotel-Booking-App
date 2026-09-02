@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kf_drawer/kf_drawer.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../core/utils/debouncer.dart';
@@ -108,7 +109,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               SizedBox(height: m.headerTop),
               DashboardHeader(
                 metrics: m,
-                onMenuTap: () => ComingSoonDialog.show(context),
+                onMenuTap: () => KFDrawer.of(context)?.open(),
               ),
               SizedBox(height: m.searchTopGap),
               DashboardSearchBar(
@@ -235,14 +236,24 @@ class _NoResults extends StatelessWidget {
         ),
         SizedBox(height: 16 * m.scale),
         Center(
-          child: GestureDetector(
-            onTap: onReturn,
-            child: Text(
-              AppStrings.current.returnToList,
-              style: m.metaValueStyle.copyWith(
-                color: AppColors.primary,
-                decoration: TextDecoration.underline,
-                decorationColor: AppColors.primary,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onReturn,
+              borderRadius: BorderRadius.circular(4),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8 * m.scale,
+                  vertical: 4 * m.scale,
+                ),
+                child: Text(
+                  AppStrings.current.returnToList,
+                  style: m.metaValueStyle.copyWith(
+                    color: AppColors.primary,
+                    decoration: TextDecoration.underline,
+                    decorationColor: AppColors.primary,
+                  ),
+                ),
               ),
             ),
           ),

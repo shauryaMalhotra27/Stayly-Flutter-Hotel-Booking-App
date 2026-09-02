@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_icons.dart';
-import '../../../app/theme/app_images.dart';
+import '../../../core/widgets/circle_icon_button.dart';
 import '../../../core/widgets/coming_soon_dialog.dart';
 import '../../../data/models/hotel.dart';
 import '../../../l10n/app_strings.dart';
@@ -25,28 +25,23 @@ class HotelDetailHeader extends StatefulWidget {
 }
 
 class _HotelDetailHeaderState extends State<HotelDetailHeader> {
-  late final PageController _pageController;
   int _currentPage = 0;
 
-  /// Same gallery assets for every property (Figma: 2-frame carousel).
-  static const _gallery = [AppImages.propertyOne, AppImages.propertyTwo];
+  List<String> get _gallery => widget.hotel.imageAssets;
 
   @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
+  void didUpdateWidget(covariant HotelDetailHeader oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.hotel.id != widget.hotel.id) {
+      _currentPage = 0;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final m = widget.metrics;
     final hotel = widget.hotel;
+    final gallery = _gallery;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -54,7 +49,7 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
         // Layout height stops where the panel begins; hero paints below via
         // Positioned so the panel can overlap without a negative margin.
         SizedBox(
-          height: m.heroHeight - m.panelOverlap,
+          height: (m.heroHeight - m.panelOverlap).clamp(0.0, double.infinity),
           child: Stack(
             clipBehavior: Clip.none,
             children: [
@@ -67,19 +62,37 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(m.cardRadius),
                   ),
-                  child: PageView.builder(
-                    controller: _pageController,
-                    itemCount: _gallery.length,
-                    onPageChanged: (index) =>
-                        setState(() => _currentPage = index),
-                    itemBuilder: (context, index) {
-                      return Image.asset(
-                        _gallery[index],
+                  child: GestureDetector(
+                    onHorizontalDragEnd: (details) {
+                      final v = details.primaryVelocity ?? 0;
+                      if (v < -200 && _currentPage < gallery.length - 1) {
+                        setState(() => _currentPage++);
+                      } else if (v > 200 && _currentPage > 0) {
+                        setState(() => _currentPage--);
+                      }
+                    },
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 420),
+                      switchInCurve: Curves.easeInOut,
+                      switchOutCurve: Curves.easeInOut,
+                      // Stack old + new so both fade together (crossfade/dissolve).
+                      layoutBuilder: (currentChild, previousChildren) {
+                        return Stack(
+                          fit: StackFit.expand,
+                          children: [...previousChildren, ?currentChild],
+                        );
+                      },
+                      transitionBuilder: (child, animation) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                      child: Image.asset(
+                        gallery[_currentPage],
+                        key: ValueKey('${hotel.id}_${gallery[_currentPage]}'),
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,
-                      );
-                    },
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -106,7 +119,7 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
                 right: 0,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(_gallery.length, (index) {
+                  children: List.generate(gallery.length, (index) {
                     return Padding(
                       padding: EdgeInsets.symmetric(horizontal: 3.5 * m.scale),
                       child: _PageDash(
@@ -185,10 +198,13 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
               ),
               SizedBox(height: 28 * m.scale),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _BellButton(
+                  CircleIconButton(
                     size: m.bellSize,
+                    iconPath: AppIcons.bell,
+                    iconScale: 1.0,
+                    svgScale: 1.15,
                     onTap: () => ComingSoonDialog.show(context),
                   ),
                   SizedBox(width: 12 * m.scale),
@@ -202,45 +218,6 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _BellButton extends StatelessWidget {
-  const _BellButton({required this.size, this.onTap});
-
-  final double size;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.primary,
-      shape: const CircleBorder(),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        customBorder: const CircleBorder(),
-        onTap: onTap,
-        child: SizedBox(
-          width: size,
-          height: size,
-          child: Center(
-            // SVG viewBox is padded — scale up so the glyph fills the disc.
-            child: Transform.scale(
-              scale: 1.15,
-              child: SvgPicture.asset(
-                AppIcons.bell,
-                width: size,
-                height: size,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.textPrimaryDark,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

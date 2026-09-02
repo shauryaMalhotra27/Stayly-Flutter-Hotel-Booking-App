@@ -51,7 +51,10 @@ class DashboardMetrics {
     final scale = ScreenScale.of(context);
     final width = MediaQuery.sizeOf(context).width;
     final horizontal = AppSizes.marginHorizontal(context);
-    final cardWidth = width - 2 * horizontal;
+    // Android can report 0×0 before the Flutter surface attaches. Subtracting
+    // padding from that width made image/meta heights negative and crashed
+    // PropertyCard (BoxConstraints h=-29.6).
+    final cardWidth = (width - 2 * horizontal).clamp(0.0, double.infinity);
 
     return DashboardMetrics(
       scale: scale,

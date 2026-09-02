@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../core/widgets/shimmer.dart';
+import '../../../core/widgets/surface_card.dart';
 import '../../../data/models/hotel.dart';
 import '../../../l10n/app_strings.dart';
 import '../utils/dashboard_metrics.dart';
@@ -36,7 +37,12 @@ class PropertyCard extends StatelessWidget {
       imageAsset: hotel?.imageAsset,
       title: isSkeleton
           ? ShimmerBox(width: 160 * m.scale, height: 18 * m.scale, radius: 6)
-          : Text(hotel!.locationTitle, style: m.cardTitleStyle),
+          : Text(
+              hotel!.locationTitle,
+              style: m.cardTitleStyle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
       meta: isSkeleton
           ? _SkeletonMeta(metrics: m)
           : _LoadedMeta(hotel: hotel!, metrics: m),
@@ -45,7 +51,14 @@ class PropertyCard extends StatelessWidget {
     final card = isSkeleton ? Shimmer(child: content) : content;
 
     if (onTap == null) return card;
-    return GestureDetector(onTap: onTap, child: card);
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(m.cardRadius),
+        child: card,
+      ),
+    );
   }
 }
 
@@ -70,7 +83,15 @@ class _PropertyCardLayout extends StatelessWidget {
     final m = metrics;
     // Meta panel overlaps the lower part of the image (Figma).
     final overlap = m.metaPanelHeight * 0.45;
-    final totalHeight = m.imageHeight + m.metaPanelHeight - overlap;
+    final totalHeight = (m.imageHeight + m.metaPanelHeight - overlap).clamp(
+      0.0,
+      double.infinity,
+    );
+    if (totalHeight <= 0 || m.metaPanelHeight <= 0) {
+      return const SizedBox.shrink();
+    }
+
+    final radius = BorderRadius.circular(m.cardRadius);
 
     return SizedBox(
       height: totalHeight,
@@ -82,7 +103,7 @@ class _PropertyCardLayout extends StatelessWidget {
             right: 0,
             height: m.imageHeight,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(m.cardRadius),
+              borderRadius: radius,
               child:
                   image ??
                   Image.asset(
@@ -102,7 +123,7 @@ class _PropertyCardLayout extends StatelessWidget {
               child: IgnorePointer(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(m.cardRadius),
+                    borderRadius: radius,
                     border: Border.all(color: AppColors.cardStroke),
                   ),
                 ),
@@ -113,11 +134,9 @@ class _PropertyCardLayout extends StatelessWidget {
             right: 0,
             bottom: 0,
             height: m.metaPanelHeight,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.surfaceDark,
-                borderRadius: BorderRadius.circular(m.cardRadius),
-              ),
+            child: SurfaceCard(
+              borderRadius: radius,
+              borderColor: Colors.transparent,
               padding: EdgeInsets.fromLTRB(
                 28 * m.scale,
                 24 * m.scale,
@@ -129,7 +148,7 @@ class _PropertyCardLayout extends StatelessWidget {
                 children: [
                   title,
                   SizedBox(height: 16 * m.scale),
-                  Expanded(child: meta),
+                  meta,
                 ],
               ),
             ),
