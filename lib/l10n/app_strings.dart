@@ -70,6 +70,19 @@ abstract class AppStrings {
   String get subscriptionSubtitle;
   String get comingSoonBadge;
 
+  // Side menu drawer
+  String get sideMenuProfileName;
+  String get sideMenuProfileLocation;
+  String get sideMenuSectionTitle;
+  String get sideMenuPayment;
+  String get sideMenuTranslate;
+  String get sideMenuPrivacy;
+  String get sideMenuListing;
+  String get sideMenuHost;
+  String get sideMenuDarkMode;
+  String get sideMenuUpdate;
+  String get sideMenuNotificationBadge;
+
   /// "Good Morning Prabhat" based on local time.
   String greetingForNow({DateTime? now, String? name}) {
     final time = now ?? DateTime.now();

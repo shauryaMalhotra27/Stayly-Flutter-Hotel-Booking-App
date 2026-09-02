@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kf_drawer/kf_drawer.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../core/utils/debouncer.dart';
@@ -108,7 +109,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               SizedBox(height: m.headerTop),
               DashboardHeader(
                 metrics: m,
-                onMenuTap: () => ComingSoonDialog.show(context),
+                onMenuTap: () => KFDrawer.of(context)?.open(),
               ),
               SizedBox(height: m.searchTopGap),
               DashboardSearchBar(

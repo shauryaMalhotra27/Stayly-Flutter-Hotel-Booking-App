@@ -21,7 +21,7 @@ class DashboardHeader extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: m.horizontalPadding),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(child: Text(greeting, style: m.greetingStyle)),
           SizedBox(width: 12 * m.scale),
@@ -47,7 +47,7 @@ class _MenuButton extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         // Stroke outside ClipOval so the off-white border stays visible.
-        border: Border.all(color: AppColors.menuButtonBorder, width: 1),
+        border: Border.all(color: AppColors.menuButtonBorder, width: 0.5),
         boxShadow: [
           BoxShadow(
             color: const Color(0x0F434343),
@@ -73,8 +73,8 @@ class _MenuButton extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(height: 2, color: AppColors.textPrimaryDark),
-                        Container(height: 2, color: AppColors.textPrimaryDark),
+                        Container(height: 1.5, color: AppColors.textPrimaryDark),
+                        Container(height: 1.5, color: AppColors.textPrimaryDark),
                       ],
                     ),
                   ),

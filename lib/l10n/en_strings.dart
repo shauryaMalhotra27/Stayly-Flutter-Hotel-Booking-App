@@ -142,4 +142,37 @@ class EnStrings extends AppStrings {
 
   @override
   String get comingSoonBadge => 'Coming Soon';
+
+  @override
+  String get sideMenuProfileName => 'Alice Premium';
+
+  @override
+  String get sideMenuProfileLocation => 'Toronto, Canada';
+
+  @override
+  String get sideMenuSectionTitle => 'Account Setting';
+
+  @override
+  String get sideMenuPayment => 'Payment';
+
+  @override
+  String get sideMenuTranslate => 'Translate';
+
+  @override
+  String get sideMenuPrivacy => 'Privacy';
+
+  @override
+  String get sideMenuListing => 'Listing';
+
+  @override
+  String get sideMenuHost => 'Host';
+
+  @override
+  String get sideMenuDarkMode => 'Dark Mode';
+
+  @override
+  String get sideMenuUpdate => 'Update';
+
+  @override
+  String get sideMenuNotificationBadge => '12';
 }

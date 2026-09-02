@@ -325,4 +325,75 @@ class AppTypography {
       color: AppColors.accentOrange,
     );
   }
+
+  /// Side menu profile name — Figma Nohemi Medium 22.
+  static TextStyle sideMenuProfileName(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 18 * scale,
+      fontWeight: medium,
+      color: AppColors.textPrimaryDark,
+      decoration: TextDecoration.none,
+    );
+  }
+
+  /// Side menu location — Figma Nohemi Regular 14 @ 68% white.
+  static TextStyle sideMenuProfileLocation(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 14 * scale,
+      fontWeight: regular,
+      color: AppColors.textSecondary,
+      decoration: TextDecoration.none,
+    );
+  }
+
+  /// Side menu section label — Figma Nohemi SemiBold 15 @ 80% white.
+  static TextStyle sideMenuSectionLabel(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 15 * scale,
+      fontWeight: semiBold,
+      color: AppColors.textPrimaryDark.withValues(alpha: 0.8),
+      decoration: TextDecoration.none,
+    );
+  }
+
+  /// Side menu item label — Figma Nohemi Regular 18 @ 68% white.
+  static TextStyle sideMenuItemLabel(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: 18 * scale,
+      fontWeight: regular,
+      color: AppColors.textSecondary,
+      decoration: TextDecoration.none,
+    );
+  }
+
+  /// Side menu notification badge — Figma SF Pro Regular, compact pill.
+  static TextStyle sideMenuBadge(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: sfProFamily,
+      fontFamilyFallback: sfProFallback,
+      fontSize: 12 * scale,
+      fontWeight: regular,
+      height: 1,
+      color: AppColors.textPrimaryDark,
+    );
+  }
 }

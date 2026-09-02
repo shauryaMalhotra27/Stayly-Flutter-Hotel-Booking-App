@@ -27,14 +27,17 @@ class AppColors {
   /// Inactive nav pill fill (Figma #373737).
   static const Color navInactive = Color(0xFF373737);
 
-  /// Menu button frosted fill — white @ ~16% (reads as soft glass on dark).
-  static const Color menuButton = Color(0x29FFFFFF);
+  /// Menu button frosted fill — white @ ~40% (less transparent / more solid).
+  static const Color menuButton = Color(0x10FFFFFF);
 
   /// Menu button stroke — off-white @ ~40%.
   static const Color menuButtonBorder = Color(0x66FFFFFF);
 
   /// Account row icon circle stroke — white @ 10%.
   static const Color accountIconBorder = Color(0x1AFFFFFF);
+
+  /// Side menu item icon disc — white @ 7% (Figma).
+  static const Color sideMenuIconDisc = Color(0x12FFFFFF);
 
   /// Subscription “Coming Soon” badge fill — accent orange @ 20%.
   static const Color comingSoonBadgeFill = Color(0x33FFAC26);

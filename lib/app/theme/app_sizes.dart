@@ -85,10 +85,10 @@ class AppSizes {
   static double menuButtonSize(BuildContext context) =>
       ResponsiveUtils.valueByDevice(
         context: context,
-        smallMobile: 52.0,
-        mediumMobile: 60.0,
-        largeMobile: 69.0,
-        tablet: 72.0,
+        smallMobile: 48.0,
+        mediumMobile: 52.0,
+        largeMobile: 60.0,
+        tablet: 64.0,
       );
 
   static double cardRadius(BuildContext context) =>
