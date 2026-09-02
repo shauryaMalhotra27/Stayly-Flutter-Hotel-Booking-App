@@ -17,10 +17,13 @@ class AppColors {
   static const Color backgroundDark = Color(0xFF0C0E0D);
   static const Color surfaceDark = Color(0xFF1C1C1E);
   static const Color surfaceBorder = Color(0xFF2C2C2C);
+
   /// Inactive nav pill fill (Figma #373737).
   static const Color navInactive = Color(0xFF373737);
+
   /// Menu button frosted fill — white @ ~16% (reads as soft glass on dark).
   static const Color menuButton = Color(0x29FFFFFF);
+
   /// Menu button stroke — off-white @ ~40%.
   static const Color menuButtonBorder = Color(0x66FFFFFF);
 

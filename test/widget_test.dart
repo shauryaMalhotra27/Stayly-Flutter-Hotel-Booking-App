@@ -19,9 +19,7 @@ void main() {
     );
     expect(find.byType(CustomBottomNavigationBar), findsOneWidget);
 
-    await tester.tap(
-      find.bySemanticsLabel(AppStrings.current.navHotelsResort),
-    );
+    await tester.tap(find.bySemanticsLabel(AppStrings.current.navHotelsResort));
     await tester.pump();
 
     expect(find.byType(HotelView), findsOneWidget);

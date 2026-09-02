@@ -8,11 +8,7 @@ import '../utils/dashboard_metrics.dart';
 
 /// Greeting + circular menu button (Figma dashboard header).
 class DashboardHeader extends StatelessWidget {
-  const DashboardHeader({
-    super.key,
-    required this.metrics,
-    this.onMenuTap,
-  });
+  const DashboardHeader({super.key, required this.metrics, this.onMenuTap});
 
   final DashboardMetrics metrics;
   final VoidCallback? onMenuTap;
@@ -77,14 +73,8 @@ class _MenuButton extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: 2,
-                          color: AppColors.textPrimaryDark,
-                        ),
-                        Container(
-                          height: 2,
-                          color: AppColors.textPrimaryDark,
-                        ),
+                        Container(height: 2, color: AppColors.textPrimaryDark),
+                        Container(height: 2, color: AppColors.textPrimaryDark),
                       ],
                     ),
                   ),

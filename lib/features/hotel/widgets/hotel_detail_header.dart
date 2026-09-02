@@ -170,10 +170,7 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
                     ),
                   ),
                   SizedBox(width: 6 * m.scale),
-                  Text(
-                    hotel.rating.toStringAsFixed(1),
-                    style: m.ratingStyle,
-                  ),
+                  Text(hotel.rating.toStringAsFixed(1), style: m.ratingStyle),
                   _MetaDivider(scale: m.scale),
                   Flexible(
                     child: Text(

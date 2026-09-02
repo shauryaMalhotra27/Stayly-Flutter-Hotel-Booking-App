@@ -199,11 +199,7 @@ class _SkeletonMeta extends StatelessWidget {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        col(),
-        col(),
-        col(),
-      ],
+      children: [col(), col(), col()],
     );
   }
 }

@@ -41,8 +41,10 @@ class _NavBarMetrics {
   final double barWidth;
   final double fixedLabelWidth;
   final double activeWidth;
+
   /// Wider pill for the account tab so the avatar can stay large.
   final double avatarActiveWidth;
+
   /// Account's own (shorter) label slot — not the longest nav label.
   final double avatarLabelWidth;
 
@@ -104,7 +106,12 @@ class _NavBarMetrics {
       textStyle,
     ).clamp(0.0, (rowWidth - reserved).clamp(0.0, rowWidth));
     final activeWidth =
-        iconSize + gap + fixedLabelWidth + labelRightInset + 2 * tabPadding + 1.0;
+        iconSize +
+        gap +
+        fixedLabelWidth +
+        labelRightInset +
+        2 * tabPadding +
+        1.0;
 
     // Account tab: its own wider pill (large avatar + short "Account" label)
     // so SVG tabs keep full text while the photo can stay big.
@@ -116,13 +123,14 @@ class _NavBarMetrics {
       }
     }
     final avatarScale = avatarItem?.activeIconScale ?? 1.0;
-    final avatarLeading =
-        (iconSize * avatarScale).clamp(iconSize, pillHeight).toDouble();
+    final avatarLeading = (iconSize * avatarScale)
+        .clamp(iconSize, pillHeight)
+        .toDouble();
     final avatarLabelWidth = avatarItem == null
         ? fixedLabelWidth
         : _labelWidth(avatarItem.text, textStyle).clamp(0.0, fixedLabelWidth);
-    final maxAvatarPill =
-        (rowWidth - 3 * inactiveTabWidth - safetyMargin).clamp(0.0, rowWidth);
+    final maxAvatarPill = (rowWidth - 3 * inactiveTabWidth - safetyMargin)
+        .clamp(0.0, rowWidth);
     final avatarActiveWidth =
         (avatarLeading +
                 gap +

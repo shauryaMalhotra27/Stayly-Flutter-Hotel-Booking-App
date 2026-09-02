@@ -53,14 +53,13 @@ class AppSizes {
       );
 
   /// Gap between property cards (Figma: 24).
-  static double cardGap(BuildContext context) =>
-      ResponsiveUtils.valueByDevice(
-        context: context,
-        smallMobile: 18.0,
-        mediumMobile: 22.0,
-        largeMobile: 24.0,
-        tablet: 28.0,
-      );
+  static double cardGap(BuildContext context) => ResponsiveUtils.valueByDevice(
+    context: context,
+    smallMobile: 18.0,
+    mediumMobile: 22.0,
+    largeMobile: 24.0,
+    tablet: 28.0,
+  );
 
   /// Content inset for hotel detail (Figma: ~29).
   static double detailHorizontal(BuildContext context) =>
@@ -123,14 +122,13 @@ class AppSizes {
   // --- ICONS ---
 
   /// Nav icons — Figma 24×24 at largeMobile, scales by device tier.
-  static double navIcon(BuildContext context) =>
-      ResponsiveUtils.valueByDevice(
-        context: context,
-        smallMobile: 20.0,
-        mediumMobile: 22.0,
-        largeMobile: 24.0,
-        tablet: 26.0,
-      );
+  static double navIcon(BuildContext context) => ResponsiveUtils.valueByDevice(
+    context: context,
+    smallMobile: 20.0,
+    mediumMobile: 22.0,
+    largeMobile: 24.0,
+    tablet: 26.0,
+  );
 
   static double iconMedium(BuildContext context) =>
       ResponsiveUtils.valueByDevice(

@@ -138,12 +138,14 @@ class CustomNavBar extends StatelessWidget {
           inactiveBackgroundColor: tabInactiveBackgroundColor,
           duration: duration,
           labelMaxWidth: labelMaxWidth,
-          fixedLabelWidth:
-              isAvatar ? (avatarLabelWidth ?? fixedLabelWidth) : fixedLabelWidth,
+          fixedLabelWidth: isAvatar
+              ? (avatarLabelWidth ?? fixedLabelWidth)
+              : fixedLabelWidth,
           height: height,
           inactiveWidth: inactiveWidth,
-          activeWidth:
-              isAvatar ? (avatarActiveWidth ?? activeWidth) : activeWidth,
+          activeWidth: isAvatar
+              ? (avatarActiveWidth ?? activeWidth)
+              : activeWidth,
           onPressed: () => onTabChange?.call(index),
         ),
       );

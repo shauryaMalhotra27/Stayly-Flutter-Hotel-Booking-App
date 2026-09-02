@@ -81,12 +81,14 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
   List<Hotel> _filterHotels(List<Hotel> hotels) {
     final q = _query.toLowerCase();
     if (q.isEmpty) return hotels;
-    return hotels.where((h) {
-      return h.locationTitle.toLowerCase().contains(q) ||
-          h.distance.toLowerCase().contains(q) ||
-          h.availableDates.toLowerCase().contains(q) ||
-          h.price.toLowerCase().contains(q);
-    }).toList(growable: false);
+    return hotels
+        .where((h) {
+          return h.locationTitle.toLowerCase().contains(q) ||
+              h.distance.toLowerCase().contains(q) ||
+              h.availableDates.toLowerCase().contains(q) ||
+              h.price.toLowerCase().contains(q);
+        })
+        .toList(growable: false);
   }
 
   @override

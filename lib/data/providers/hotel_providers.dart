@@ -16,8 +16,9 @@ class SelectedHotelId extends Notifier<String?> {
   void select(String id) => state = id;
 }
 
-final selectedHotelIdProvider =
-    NotifierProvider<SelectedHotelId, String?>(SelectedHotelId.new);
+final selectedHotelIdProvider = NotifierProvider<SelectedHotelId, String?>(
+  SelectedHotelId.new,
+);
 
 /// Selected hotel, or the first hotel if none selected yet.
 final selectedHotelProvider = Provider<AsyncValue<Hotel?>>((ref) {

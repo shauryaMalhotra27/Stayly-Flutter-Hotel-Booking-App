@@ -44,10 +44,13 @@ class NavButton extends StatefulWidget {
   final double? iconSize;
   final Text? text;
   final Widget? leading;
+
   /// Builds the icon with the animated color each frame (SVG / avatar).
   final Widget Function(Color color, double size)? iconBuilder;
+
   /// Avatar: expand to the inactive circle diameter instead of iconSize.
   final bool fillsInactiveCircle;
+
   /// Multiplier on iconSize when selected (avatars often want > 1).
   final double activeIconScale;
   final Color? iconActiveColor;
@@ -177,8 +180,8 @@ class _NavButtonState extends State<NavButton>
               // Lerp padding with width — jumping padding on/off when
               // isActive flips overflows the Row mid-animation.
               final EdgeInsets endPadding = (widget.padding is EdgeInsets
-                      ? widget.padding as EdgeInsets
-                      : EdgeInsets.zero);
+                  ? widget.padding as EdgeInsets
+                  : EdgeInsets.zero);
               // Tighter vertical inset so a scaled-up avatar still fits the pill.
               final effectiveEndPadding = widget.fillsInactiveCircle
                   ? EdgeInsets.fromLTRB(
@@ -189,7 +192,11 @@ class _NavButtonState extends State<NavButton>
                     )
                   : endPadding;
               final resolvedPadding =
-                  EdgeInsets.lerp(EdgeInsets.zero, effectiveEndPadding, widthT) ??
+                  EdgeInsets.lerp(
+                    EdgeInsets.zero,
+                    effectiveEndPadding,
+                    widthT,
+                  ) ??
                   EdgeInsets.zero;
 
               final hasLabel = widget.text != null && widget.text!.data != '';
@@ -202,8 +209,10 @@ class _NavButtonState extends State<NavButton>
 
               final baseSize = widget.iconSize ?? 24;
               final diameter = widget.height ?? baseSize;
-              final activeSize = (baseSize * widget.activeIconScale)
-                  .clamp(baseSize, diameter);
+              final activeSize = (baseSize * widget.activeIconScale).clamp(
+                baseSize,
+                diameter,
+              );
               var size = widget.fillsInactiveCircle
                   ? (lerpDouble(diameter, activeSize, widthT) ?? activeSize)
                   : baseSize;
@@ -211,9 +220,7 @@ class _NavButtonState extends State<NavButton>
               // never trips a RenderFlex overflow.
               if (currentWidth != null) {
                 final maxIcon =
-                    (currentWidth -
-                            resolvedPadding.horizontal -
-                            labelFootprint)
+                    (currentWidth - resolvedPadding.horizontal - labelFootprint)
                         .clamp(0.0, double.infinity);
                 if (size > maxIcon) size = maxIcon;
               }
@@ -278,11 +285,7 @@ class _NavButtonState extends State<NavButton>
 
               // Hide the gray ring behind a full-bleed avatar.
               final bgColor = widget.fillsInactiveCircle && widthT < 0.5
-                  ? Color.lerp(
-                      Colors.transparent,
-                      widget.color,
-                      widthT * 2,
-                    )
+                  ? Color.lerp(Colors.transparent, widget.color, widthT * 2)
                   : Color.lerp(widget.inactiveColor, widget.color, t);
 
               return Container(
