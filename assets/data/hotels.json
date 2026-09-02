@@ -5,8 +5,12 @@
     "distance": "150KM",
     "availableDates": "OCT 24-25",
     "price": "$50.00",
-    "imageAsset": "assets/images/propertyOne.png",
-    "hostImageAsset": "assets/images/user.png",
+    "imageAssets": [
+      "assets/images/Toronto/toronto_hotel_lobby.webp",
+      "assets/images/Toronto/modern_hotel_bedroom_city.webp",
+      "assets/images/Toronto/luxury_apartment_toronto.webp"
+    ],
+    "hostImageAsset": "assets/images/user.webp",
     "hotelName": "Hosted by Trang Luxury, Lifestyle",
     "rating": 4.9,
     "reviewCount": 1648,
@@ -19,12 +23,70 @@
     "distance": "85KM",
     "availableDates": "NOV 12-14",
     "price": "$78.00",
-    "imageAsset": "assets/images/propertyTwo.png",
-    "hostImageAsset": "assets/images/user.png",
+    "imageAssets": [
+      "assets/images/Bali/bali_villa_pool.webp",
+      "assets/images/Bali/tropical_villa_bedroom.webp",
+      "assets/images/Bali/seminyak_resort.webp"
+    ],
+    "hostImageAsset": "assets/images/user.webp",
     "hotelName": "Hosted by Ocean Breeze Villas",
     "rating": 4.7,
     "reviewCount": 932,
     "fullAddress": "Jl. Kayu Aya No. 88, Seminyak, Bali 80361, Indonesia",
     "description": "Unwind in a serene beachfront villa surrounded by tropical gardens and ocean views. Private pools, open-air lounges, and thoughtful amenities make this retreat ideal for couples and small groups seeking calm after busy travel days.\n\nEnjoy fresh island cuisine, complimentary sunrise yoga, and easy access to Seminyak’s cafes and nightlife. Every stay is designed around comfort, quiet mornings, and warm Balinese hospitality."
+  },
+  {
+    "id": "santorini-1",
+    "locationTitle": "Santorini, Greece",
+    "distance": "210KM",
+    "availableDates": "SEP 18-20",
+    "price": "$142.00",
+    "imageAssets": [
+      "assets/images/Santorini/santorini_hotel_pool.webp",
+      "assets/images/Santorini/oia_suite_terrace.webp",
+      "assets/images/Santorini/cyclades_white_hotel.webp"
+    ],
+    "hostImageAsset": "assets/images/user.webp",
+    "hotelName": "Hosted by Aegean Cliff Suites",
+    "rating": 4.8,
+    "reviewCount": 1214,
+    "fullAddress": "Oia Caldera Road 12, Oia 84702, Santorini, Greece",
+    "description": "Wake up to caldera views from a whitewashed cliffside suite with an infinity pool and sun-drenched terraces. Soft Cycladic interiors, private plunge decks, and golden-hour lounges make this stay ideal for couples and travelers seeking quiet luxury.\n\nWalk to Oia’s cafes and blue-dome viewpoints, then return for sunset dining and spa treatments overlooking the Aegean. Every detail is tuned for calm mornings, warm evenings, and unforgettable island light."
+  },
+  {
+    "id": "kyoto-1",
+    "locationTitle": "Kyoto, Japan",
+    "distance": "45KM",
+    "availableDates": "OCT 08-10",
+    "price": "$96.00",
+    "imageAssets": [
+      "assets/images/Kyoto/kyoto_ryokan.webp",
+      "assets/images/Kyoto/tatami_room.webp",
+      "assets/images/Kyoto/japanese_hotel_garden.webp"
+    ],
+    "hostImageAsset": "assets/images/user.webp",
+    "hotelName": "Hosted by Maple Garden Ryokan",
+    "rating": 4.9,
+    "reviewCount": 1876,
+    "fullAddress": "Shimogyo-ku, Kyoto 600-8216, Japan",
+    "description": "Settle into a refined ryokan-inspired stay with tatami rooms, a quiet courtyard garden, and thoughtful hospitality rooted in Kyoto tradition. Soft lighting, seasonal cuisine, and private bathing experiences create a restful pace after temple walks and city exploring.\n\nGuests enjoy serene mornings in the garden, easy access to Gion and the station area, and evenings designed for slow rituals—tea, onsen-style soaking, and restful sleep."
+  },
+  {
+    "id": "maldives-1",
+    "locationTitle": "Malé Atoll, Maldives",
+    "distance": "320KM",
+    "availableDates": "DEC 02-05",
+    "price": "$268.00",
+    "imageAssets": [
+      "assets/images/Maldives/maldives_overwater_villa.webp",
+      "assets/images/Maldives/overwater_bungalow_deck.webp",
+      "assets/images/Maldives/maldives_resort_bedroom.webp"
+    ],
+    "hostImageAsset": "assets/images/user.webp",
+    "hotelName": "Hosted by Lagoon Pearl Villas",
+    "rating": 4.9,
+    "reviewCount": 754,
+    "fullAddress": "North Malé Atoll, Maldives",
+    "description": "Step into an overwater villa suspended above clear lagoon water, with a private deck, glass-floor moments, and direct ocean access. Soft coastal interiors and open-air lounges make this the destination for slow days and starlit evenings.\n\nSnorkel from your ladder, unwind on the sun deck, and enjoy resort dining with reef views. Ideal for honeymoons and travelers seeking privacy, turquoise water, and effortless island calm."
   }
 ]

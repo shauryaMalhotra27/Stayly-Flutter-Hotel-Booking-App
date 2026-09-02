@@ -48,6 +48,25 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.6
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: assets/images/appLogo.png
+  adaptive_icon_background: "#0C0E0D"
+  adaptive_icon_foreground: assets/images/appLogo.png
+
+flutter_native_splash:
+  color: "#0C0E0D"
+  image: assets/images/splashLogo.png
+  android: true
+  ios: false
+  android_12:
+    color: "#0C0E0D"
+    image: assets/images/splashLogo.png
+    icon_background_color: "#0C0E0D"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -69,6 +88,11 @@ flutter:
     - assets/icons/nav/
     - assets/icons/account/
     - assets/images/
+    - assets/images/Bali/
+    - assets/images/Kyoto/
+    - assets/images/Maldives/
+    - assets/images/Santorini/
+    - assets/images/Toronto/
     - assets/data/
 
   # An image asset can refer to one or more resolution-specific "variants", see

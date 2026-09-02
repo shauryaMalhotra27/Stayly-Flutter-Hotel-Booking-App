@@ -70,7 +70,13 @@ class _PropertyCardLayout extends StatelessWidget {
     final m = metrics;
     // Meta panel overlaps the lower part of the image (Figma).
     final overlap = m.metaPanelHeight * 0.45;
-    final totalHeight = m.imageHeight + m.metaPanelHeight - overlap;
+    final totalHeight = (m.imageHeight + m.metaPanelHeight - overlap).clamp(
+      0.0,
+      double.infinity,
+    );
+    if (totalHeight <= 0 || m.metaPanelHeight <= 0) {
+      return const SizedBox.shrink();
+    }
 
     return SizedBox(
       height: totalHeight,
@@ -129,7 +135,7 @@ class _PropertyCardLayout extends StatelessWidget {
                 children: [
                   title,
                   SizedBox(height: 16 * m.scale),
-                  Expanded(child: meta),
+                  meta,
                 ],
               ),
             ),

@@ -7,6 +7,7 @@ abstract class AppStrings {
   // App
   String get appTitle;
   String get userDisplayName;
+  String get pressBackAgainToExit;
 
   // Time-based greeting prefixes (name appended by [greetingForNow]).
   String get goodMorning;

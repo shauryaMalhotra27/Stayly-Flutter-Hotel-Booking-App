@@ -3,7 +3,10 @@ import 'app_strings.dart';
 /// English UI strings. Add `hi_strings.dart` (etc.) later for other locales.
 class EnStrings extends AppStrings {
   @override
-  String get appTitle => 'Hotel Booking App';
+  String get appTitle => 'Stayly';
+
+  @override
+  String get pressBackAgainToExit => 'Press back again to exit';
 
   @override
   String get userDisplayName => 'Prabhat';

@@ -109,15 +109,25 @@ class AppSizes {
         tablet: 54.0,
       );
 
-  /// Bottom clearance so scroll content clears the floating nav.
-  static double navClearance(BuildContext context) =>
-      ResponsiveUtils.valueByDevice(
-        context: context,
-        smallMobile: 100.0,
-        mediumMobile: 110.0,
-        largeMobile: 120.0,
-        tablet: 130.0,
-      );
+  /// Bottom clearance so scroll content clears the floating nav + system inset.
+  ///
+  /// Uses [MediaQuery.viewPadding] (not [MediaQuery.padding]): with
+  /// [Scaffold.extendBody], padding.bottom is inflated to the bottom bar's
+  /// laid-out height, which can be nearly full-screen and zero out Column
+  /// layouts (e.g. Booking).
+  static double navClearance(BuildContext context) {
+    final bottomInset = MediaQuery.viewPaddingOf(context).bottom;
+    // Bar block: pill + vertical margins/padding (excludes system inset).
+    final barBlock = ResponsiveUtils.valueByDevice(
+      context: context,
+      smallMobile: 88.0,
+      mediumMobile: 92.0,
+      largeMobile: 96.0,
+      tablet: 104.0,
+    );
+    // Extra gap so the last row sits clearly above the pill.
+    return barBlock + bottomInset + 24.0;
+  }
 
   // --- ICONS ---
 

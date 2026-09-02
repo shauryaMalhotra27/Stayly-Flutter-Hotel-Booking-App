@@ -42,14 +42,17 @@ class HotelDetailMetrics {
   factory HotelDetailMetrics.of(BuildContext context) {
     final scale = ScreenScale.of(context);
     final width = MediaQuery.sizeOf(context).width;
+    // Same 0×0 first-frame as the dashboard: keep heroHeight - panelOverlap >= 0.
+    final heroHeight = (width * (374 / 440)).clamp(0.0, double.infinity);
+    final panelOverlap = (80 * scale).clamp(0.0, heroHeight);
 
     return HotelDetailMetrics(
       scale: scale,
       horizontalPadding: AppSizes.detailHorizontal(context),
       cardRadius: AppSizes.cardRadius(context),
       // Figma hero ~374 on ~440 width.
-      heroHeight: width * (374 / 440),
-      panelOverlap: 80 * scale,
+      heroHeight: heroHeight,
+      panelOverlap: panelOverlap,
       hostAvatarSize: 76 * scale,
       starSize: 22 * scale,
       // Visible blue disc ~36; SVG has its own padding so glyph can fill more.

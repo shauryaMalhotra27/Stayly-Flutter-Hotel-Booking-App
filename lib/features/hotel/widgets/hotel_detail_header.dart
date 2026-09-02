@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_icons.dart';
-import '../../../app/theme/app_images.dart';
 import '../../../core/widgets/coming_soon_dialog.dart';
 import '../../../data/models/hotel.dart';
 import '../../../l10n/app_strings.dart';
@@ -28,13 +27,23 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
   late final PageController _pageController;
   int _currentPage = 0;
 
-  /// Same gallery assets for every property (Figma: 2-frame carousel).
-  static const _gallery = [AppImages.propertyOne, AppImages.propertyTwo];
+  List<String> get _gallery => widget.hotel.imageAssets;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
+  }
+
+  @override
+  void didUpdateWidget(covariant HotelDetailHeader oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.hotel.id != widget.hotel.id) {
+      _currentPage = 0;
+      if (_pageController.hasClients) {
+        _pageController.jumpToPage(0);
+      }
+    }
   }
 
   @override
@@ -47,6 +56,7 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
   Widget build(BuildContext context) {
     final m = widget.metrics;
     final hotel = widget.hotel;
+    final gallery = _gallery;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -54,7 +64,7 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
         // Layout height stops where the panel begins; hero paints below via
         // Positioned so the panel can overlap without a negative margin.
         SizedBox(
-          height: m.heroHeight - m.panelOverlap,
+          height: (m.heroHeight - m.panelOverlap).clamp(0.0, double.infinity),
           child: Stack(
             clipBehavior: Clip.none,
             children: [
@@ -69,12 +79,12 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
                   ),
                   child: PageView.builder(
                     controller: _pageController,
-                    itemCount: _gallery.length,
+                    itemCount: gallery.length,
                     onPageChanged: (index) =>
                         setState(() => _currentPage = index),
                     itemBuilder: (context, index) {
                       return Image.asset(
-                        _gallery[index],
+                        gallery[index],
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,
@@ -106,7 +116,7 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
                 right: 0,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(_gallery.length, (index) {
+                  children: List.generate(gallery.length, (index) {
                     return Padding(
                       padding: EdgeInsets.symmetric(horizontal: 3.5 * m.scale),
                       child: _PageDash(
