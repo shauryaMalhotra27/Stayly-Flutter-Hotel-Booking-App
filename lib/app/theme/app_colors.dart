@@ -13,6 +13,12 @@ class AppColors {
   static const Color accentGreen = Color(0xFF6FB114);
   static const Color pageDotActive = Color(0xFFFF8000);
 
+  /// Cancel Date text fill (Figma #FF8000).
+  static const Color cancelDate = Color(0xFFFF8000);
+
+  /// Cancel Date underline — lighter orange than the text fill.
+  static const Color cancelDateUnderline = Color(0xFFFFC266);
+
   // Background and Surface colors
   static const Color backgroundDark = Color(0xFF0C0E0D);
   static const Color surfaceDark = Color(0xFF1C1C1E);

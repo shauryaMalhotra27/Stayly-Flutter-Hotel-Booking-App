@@ -201,4 +201,74 @@ class AppTypography {
       color: AppColors.textMuted,
     );
   }
+
+  /// Booking stay title — same size as greeting, Bold.
+  static TextStyle bookingStayTitle(
+    BuildContext context, {
+    required double scale,
+  }) {
+    final size = AppSizes.textGreeting(context) * scale;
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: size,
+      fontWeight: semiBold,
+      height: 43 / 35,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  /// Booking date range subtitle — Figma ~16 Regular, secondary white.
+  static TextStyle bookingDateRange(
+    BuildContext context, {
+    required double scale,
+  }) {
+    final size = AppSizes.textAddress(context) * scale;
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: size,
+      fontWeight: regular,
+      height: 22 / 16,
+      color: AppColors.textSecondary,
+    );
+  }
+
+  /// Booking cancel action — Figma Bold 18, #FF8000.
+  static TextStyle bookingCancelDate(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: AppSizes.textSectionTitle(context) * scale,
+      fontWeight: bold,
+      letterSpacing: 0.015 * 18,
+      color: AppColors.cancelDate,
+    );
+  }
+
+  /// Booking month label — Figma Medium 18 centered.
+  static TextStyle bookingMonthLabel(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: AppSizes.textSectionTitle(context) * scale,
+      fontWeight: medium,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  /// Booking day cell — Figma Inter Regular 16 @ 80% white.
+  static TextStyle bookingDayCell(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: 'Inter',
+      fontSize: AppSizes.textMetaValue(context) * scale,
+      fontWeight: regular,
+      color: AppColors.textPrimaryDark.withValues(alpha: 0.8),
+    );
+  }
 }

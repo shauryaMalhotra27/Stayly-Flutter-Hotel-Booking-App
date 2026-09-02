@@ -46,6 +46,11 @@ abstract class AppStrings {
   String get accountPlaceholder;
   String get bookingPlaceholder;
 
+  // Booking
+  String get cancelDate;
+  String get selectDatesHint;
+  String nightStay(int nights);
+
   /// "Good Morning Prabhat" based on local time.
   String greetingForNow({DateTime? now, String? name}) {
     final time = now ?? DateTime.now();

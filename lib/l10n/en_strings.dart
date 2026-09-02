@@ -81,4 +81,14 @@ class EnStrings extends AppStrings {
 
   @override
   String get bookingPlaceholder => 'Booking Placeholder';
+
+  @override
+  String get cancelDate => 'Cancel Date';
+
+  @override
+  String get selectDatesHint => 'Select dates';
+
+  @override
+  String nightStay(int nights) =>
+      nights == 1 ? '1-night stay' : '$nights-night stay';
 }
