@@ -239,4 +239,24 @@ class AppSizes {
         largeMobile: 16.0,
         tablet: 17.0,
       );
+
+  /// Account menu title — Figma 15 SemiBold.
+  static double textAccountTitle(BuildContext context) =>
+      ResponsiveUtils.valueByDevice(
+        context: context,
+        smallMobile: 13.0,
+        mediumMobile: 14.0,
+        largeMobile: 15.0,
+        tablet: 16.0,
+      );
+
+  /// Account menu subtitle — Figma 12 Regular (SF Pro).
+  static double textAccountSubtitle(BuildContext context) =>
+      ResponsiveUtils.valueByDevice(
+        context: context,
+        smallMobile: 11.0,
+        mediumMobile: 11.0,
+        largeMobile: 12.0,
+        tablet: 13.0,
+      );
 }

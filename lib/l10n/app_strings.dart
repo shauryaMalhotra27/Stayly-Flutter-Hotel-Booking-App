@@ -51,6 +51,25 @@ abstract class AppStrings {
   String get selectDatesHint;
   String nightStay(int nights);
 
+  // Account menu
+  String get editProfile;
+  String get editProfileSubtitle;
+  String get accountSettings;
+  String get accountSettingsSubtitle;
+  String get notification;
+  String get notificationSubtitle;
+  String get appearance;
+  String get appearanceSubtitle;
+  String get helpAndFeedback;
+  String get helpAndFeedbackSubtitle;
+  String get inviteFriend;
+  String get inviteFriendSubtitle;
+  String get privacySecurity;
+  String get privacySecuritySubtitle;
+  String get subscription;
+  String get subscriptionSubtitle;
+  String get comingSoonBadge;
+
   /// "Good Morning Prabhat" based on local time.
   String greetingForNow({DateTime? now, String? name}) {
     final time = now ?? DateTime.now();

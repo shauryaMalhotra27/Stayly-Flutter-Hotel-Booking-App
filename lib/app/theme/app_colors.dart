@@ -33,6 +33,12 @@ class AppColors {
   /// Menu button stroke — off-white @ ~40%.
   static const Color menuButtonBorder = Color(0x66FFFFFF);
 
+  /// Account row icon circle stroke — white @ 10%.
+  static const Color accountIconBorder = Color(0x1AFFFFFF);
+
+  /// Subscription “Coming Soon” badge fill — accent orange @ 20%.
+  static const Color comingSoonBadgeFill = Color(0x33FFAC26);
+
   // Grey palette
   static const Color greyText = Color(0xFF888F9B);
   static const Color greyDark = Color(0xFF363637);

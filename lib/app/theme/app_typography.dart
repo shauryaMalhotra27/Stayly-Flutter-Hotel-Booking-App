@@ -271,4 +271,58 @@ class AppTypography {
       color: AppColors.textPrimaryDark.withValues(alpha: 0.8),
     );
   }
+
+  /// SF Pro on Apple; falls back to system sans elsewhere.
+  static const String sfProFamily = '.SF Pro Text';
+  static const List<String> sfProFallback = [
+    'SF Pro Text',
+    'SFProText',
+    'Helvetica Neue',
+    'Roboto',
+  ];
+
+  /// Account menu title — Figma Nohemi SemiBold 15, tracking 1.5%.
+  static TextStyle accountMenuTitle(
+    BuildContext context, {
+    required double scale,
+  }) {
+    final size = AppSizes.textAccountTitle(context) * scale;
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: size,
+      fontWeight: semiBold,
+      letterSpacing: 0.015 * 15,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  /// Account menu subtitle — Figma SF Pro Regular 12 @ 68% white.
+  static TextStyle accountMenuSubtitle(
+    BuildContext context, {
+    required double scale,
+  }) {
+    final size = AppSizes.textAccountSubtitle(context) * scale;
+    return TextStyle(
+      fontFamily: sfProFamily,
+      fontFamilyFallback: sfProFallback,
+      fontSize: size,
+      fontWeight: regular,
+      color: AppColors.textSecondary,
+    );
+  }
+
+  /// Subscription badge — Figma SF Pro Bold ~10, accent orange.
+  static TextStyle accountComingSoonBadge(
+    BuildContext context, {
+    required double scale,
+  }) {
+    return TextStyle(
+      fontFamily: sfProFamily,
+      fontFamilyFallback: sfProFallback,
+      fontSize: 10 * scale,
+      fontWeight: bold,
+      height: 16.55 / 9.93,
+      color: AppColors.accentOrange,
+    );
+  }
 }

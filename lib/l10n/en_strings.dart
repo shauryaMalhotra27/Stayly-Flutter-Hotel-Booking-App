@@ -91,4 +91,55 @@ class EnStrings extends AppStrings {
   @override
   String nightStay(int nights) =>
       nights == 1 ? '1-night stay' : '$nights-night stay';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get editProfileSubtitle => 'Manage your professional profile';
+
+  @override
+  String get accountSettings => 'Account';
+
+  @override
+  String get accountSettingsSubtitle => 'Manage account and login settings';
+
+  @override
+  String get notification => 'Notification';
+
+  @override
+  String get notificationSubtitle => 'Manage your notification preferences';
+
+  @override
+  String get appearance => 'Appearance';
+
+  @override
+  String get appearanceSubtitle => 'Customize your app experience';
+
+  @override
+  String get helpAndFeedback => 'Help & Feedback';
+
+  @override
+  String get helpAndFeedbackSubtitle => 'Get help or share feedback';
+
+  @override
+  String get inviteFriend => 'Invite a friend';
+
+  @override
+  String get inviteFriendSubtitle => 'Invite friends to NextRole.app';
+
+  @override
+  String get privacySecurity => 'Privacy & Security';
+
+  @override
+  String get privacySecuritySubtitle => 'Manage privacy and data settings';
+
+  @override
+  String get subscription => 'Subscription';
+
+  @override
+  String get subscriptionSubtitle => 'Manage your plan and billing';
+
+  @override
+  String get comingSoonBadge => 'Coming Soon';
 }
