@@ -65,16 +65,24 @@ class BookingStayHeader extends StatelessWidget {
           ),
         ),
         SizedBox(width: 12 * metrics.scale),
-        GestureDetector(
-          onTap: onCancelDate,
-          behavior: HitTestBehavior.opaque,
-          child: Padding(
-            padding: EdgeInsets.only(top: 6 * metrics.scale),
-            child: Text(
-              s.cancelDate,
-              style: metrics.cancelDateStyle.copyWith(
-                decoration: TextDecoration.underline,
-                decorationColor: AppColors.cancelDateUnderline,
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onCancelDate,
+            borderRadius: BorderRadius.circular(4),
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 6 * metrics.scale,
+                left: 4 * metrics.scale,
+                right: 4 * metrics.scale,
+                bottom: 4 * metrics.scale,
+              ),
+              child: Text(
+                s.cancelDate,
+                style: metrics.cancelDateStyle.copyWith(
+                  decoration: TextDecoration.underline,
+                  decorationColor: AppColors.cancelDateUnderline,
+                ),
               ),
             ),
           ),

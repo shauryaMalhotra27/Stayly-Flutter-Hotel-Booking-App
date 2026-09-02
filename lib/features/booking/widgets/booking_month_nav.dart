@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_icons.dart';
+import '../../../core/widgets/circle_icon_button.dart';
 import '../utils/booking_metrics.dart';
 
 class BookingMonthNav extends StatelessWidget {
@@ -22,58 +21,18 @@ class BookingMonthNav extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _NavCircleButton(
+        CircleIconButton(
           size: metrics.monthNavSize,
-          icon: AppIcons.leftArrow,
+          iconPath: AppIcons.leftArrow,
           onTap: onPrevious,
         ),
         SizedBox(width: metrics.monthNavGap),
-        _NavCircleButton(
+        CircleIconButton(
           size: metrics.monthNavSize,
-          icon: AppIcons.rightArrow,
+          iconPath: AppIcons.rightArrow,
           onTap: onNext,
         ),
       ],
-    );
-  }
-}
-
-class _NavCircleButton extends StatelessWidget {
-  const _NavCircleButton({
-    required this.size,
-    required this.icon,
-    required this.onTap,
-  });
-
-  final double size;
-  final String icon;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.primary,
-      shape: const CircleBorder(),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        customBorder: const CircleBorder(),
-        onTap: onTap,
-        child: SizedBox(
-          width: size,
-          height: size,
-          child: Center(
-            child: SvgPicture.asset(
-              icon,
-              width: size * 0.45,
-              height: size * 0.45,
-              colorFilter: const ColorFilter.mode(
-                AppColors.textPrimaryDark,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

@@ -3,8 +3,6 @@ class AppImages {
   AppImages._();
 
   static const String user = 'assets/images/user.webp';
-  static const String appLogo = 'assets/images/appLogo.png';
-  static const String splashLogo = 'assets/images/splashLogo.png';
 
   static const List<String> toronto = [
     'assets/images/Toronto/toronto_hotel_lobby.webp',

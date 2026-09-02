@@ -236,14 +236,24 @@ class _NoResults extends StatelessWidget {
         ),
         SizedBox(height: 16 * m.scale),
         Center(
-          child: GestureDetector(
-            onTap: onReturn,
-            child: Text(
-              AppStrings.current.returnToList,
-              style: m.metaValueStyle.copyWith(
-                color: AppColors.primary,
-                decoration: TextDecoration.underline,
-                decorationColor: AppColors.primary,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onReturn,
+              borderRadius: BorderRadius.circular(4),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8 * m.scale,
+                  vertical: 4 * m.scale,
+                ),
+                child: Text(
+                  AppStrings.current.returnToList,
+                  style: m.metaValueStyle.copyWith(
+                    color: AppColors.primary,
+                    decoration: TextDecoration.underline,
+                    decorationColor: AppColors.primary,
+                  ),
+                ),
               ),
             ),
           ),

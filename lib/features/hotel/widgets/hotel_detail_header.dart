@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_icons.dart';
+import '../../../core/widgets/circle_icon_button.dart';
 import '../../../core/widgets/coming_soon_dialog.dart';
 import '../../../data/models/hotel.dart';
 import '../../../l10n/app_strings.dart';
@@ -205,10 +206,13 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
               ),
               SizedBox(height: 28 * m.scale),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _BellButton(
+                  CircleIconButton(
                     size: m.bellSize,
+                    iconPath: AppIcons.bell,
+                    iconScale: 1.0,
+                    svgScale: 1.15,
                     onTap: () => ComingSoonDialog.show(context),
                   ),
                   SizedBox(width: 12 * m.scale),
@@ -222,45 +226,6 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _BellButton extends StatelessWidget {
-  const _BellButton({required this.size, this.onTap});
-
-  final double size;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.primary,
-      shape: const CircleBorder(),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        customBorder: const CircleBorder(),
-        onTap: onTap,
-        child: SizedBox(
-          width: size,
-          height: size,
-          child: Center(
-            // SVG viewBox is padded — scale up so the glyph fills the disc.
-            child: Transform.scale(
-              scale: 1.15,
-              child: SvgPicture.asset(
-                AppIcons.bell,
-                width: size,
-                height: size,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.textPrimaryDark,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

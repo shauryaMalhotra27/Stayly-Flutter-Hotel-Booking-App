@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_icons.dart';
+import '../../../core/widgets/surface_card.dart';
 import '../../../l10n/app_strings.dart';
 import '../utils/account_metrics.dart';
 
@@ -31,14 +32,9 @@ class AccountMenuItem extends StatelessWidget {
 
     return SizedBox(
       height: m.rowHeight,
-      child: Material(
-        color: AppColors.surfaceDark,
-        shape: RoundedRectangleBorder(
-          borderRadius: borderRadius,
-          side: const BorderSide(color: AppColors.surfaceBorder),
-        ),
+      child: SurfaceCard(
+        borderRadius: borderRadius,
         clipBehavior: Clip.antiAlias,
-        // Same tree for every row (InkWell with null onTap = non-interactive).
         child: InkWell(
           onTap: onTap,
           borderRadius: borderRadius,

@@ -26,7 +26,6 @@ class BookingMetrics {
     required this.monthNavSize,
     required this.monthNavGap,
     required this.headerTop,
-    required this.calendarTopGap,
     required this.monthNavTopGap,
   });
 
@@ -49,7 +48,6 @@ class BookingMetrics {
   final double monthNavSize;
   final double monthNavGap;
   final double headerTop;
-  final double calendarTopGap;
   final double monthNavTopGap;
 
   factory BookingMetrics.of(BuildContext context) {
@@ -78,7 +76,6 @@ class BookingMetrics {
       monthNavGap: 56 * scale,
       // Match dashboard: SafeArea + 24*scale above greeting.
       headerTop: 24 * scale,
-      calendarTopGap: 24 * scale,
       monthNavTopGap: 20 * scale,
     );
   }

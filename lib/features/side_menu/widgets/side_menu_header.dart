@@ -62,18 +62,21 @@ class SideMenuHeader extends StatelessWidget {
           ),
         ),
         SizedBox(width: 8 * m.scale),
-        GestureDetector(
-          onTap: onClose,
-          behavior: HitTestBehavior.opaque,
-          child: Padding(
-            padding: EdgeInsets.all(4 * m.scale),
-            child: SvgPicture.asset(
-              AppIcons.cross,
-              width: m.closeSize,
-              height: m.closeSize,
-              colorFilter: const ColorFilter.mode(
-                AppColors.textPrimaryDark,
-                BlendMode.srcIn,
+        Material(
+          color: Colors.transparent,
+          child: InkResponse(
+            onTap: onClose,
+            radius: m.closeSize,
+            child: Padding(
+              padding: EdgeInsets.all(4 * m.scale),
+              child: SvgPicture.asset(
+                AppIcons.cross,
+                width: m.closeSize,
+                height: m.closeSize,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.textPrimaryDark,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),

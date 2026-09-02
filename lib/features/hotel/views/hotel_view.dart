@@ -44,21 +44,26 @@ class HotelView extends ConsumerWidget {
                 SliverToBoxAdapter(
                   child: HotelDetailHeader(hotel: hotel, metrics: m),
                 ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      m.horizontalPadding,
-                      20 * m.scale,
-                      m.horizontalPadding,
-                      m.navClearance,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(s.description, style: m.sectionTitleStyle),
-                        SizedBox(height: 12 * m.scale),
-                        Text(hotel.description, style: m.descriptionStyle),
-                      ],
+                // Hero stays edge-to-edge; description respects top/system insets.
+                SliverSafeArea(
+                  top: false,
+                  bottom: false,
+                  sliver: SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        m.horizontalPadding,
+                        20 * m.scale,
+                        m.horizontalPadding,
+                        m.navClearance,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(s.description, style: m.sectionTitleStyle),
+                          SizedBox(height: 12 * m.scale),
+                          Text(hotel.description, style: m.descriptionStyle),
+                        ],
+                      ),
                     ),
                   ),
                 ),

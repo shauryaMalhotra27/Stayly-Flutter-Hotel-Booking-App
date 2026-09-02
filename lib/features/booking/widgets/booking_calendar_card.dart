@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
+import '../../../core/widgets/surface_card.dart';
 import '../utils/booking_calendar_math.dart';
 import '../utils/booking_metrics.dart';
 
@@ -28,50 +29,45 @@ class BookingCalendarCard extends StatelessWidget {
     // Reserve empty space for a 6th week when the month only needs 5 rows.
     const maxRows = 6;
     final reservedRows = maxRows - rowCount;
+    final radius = BorderRadius.circular(metrics.cardRadius);
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.surfaceDark,
-        borderRadius: BorderRadius.circular(metrics.cardRadius),
-        border: Border.all(color: AppColors.surfaceBorder),
+    return SurfaceCard(
+      borderRadius: radius,
+      padding: EdgeInsets.fromLTRB(
+        metrics.calendarHorizontalPadding,
+        metrics.calendarVerticalPadding,
+        metrics.calendarHorizontalPadding,
+        metrics.calendarBottomPadding,
       ),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(
-          metrics.calendarHorizontalPadding,
-          metrics.calendarVerticalPadding,
-          metrics.calendarHorizontalPadding,
-          metrics.calendarBottomPadding,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(monthLabel, style: metrics.monthLabelStyle),
-            SizedBox(height: metrics.monthLabelGap),
-            for (var row = 0; row < rowCount; row++) ...[
-              if (row > 0) SizedBox(height: metrics.dayRowGap),
-              Row(
-                children: [
-                  for (var col = 0; col < 7; col++)
-                    Expanded(
-                      child: _DayCell(
-                        metrics: metrics,
-                        date: cells[row * 7 + col].date,
-                        isCurrentMonth: cells[row * 7 + col].isCurrentMonth,
-                        rangeStart: rangeStart,
-                        rangeEnd: rangeEnd,
-                        onTap: () => onDaySelected(cells[row * 7 + col].date),
-                      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(monthLabel, style: metrics.monthLabelStyle),
+          SizedBox(height: metrics.monthLabelGap),
+          for (var row = 0; row < rowCount; row++) ...[
+            if (row > 0) SizedBox(height: metrics.dayRowGap),
+            Row(
+              children: [
+                for (var col = 0; col < 7; col++)
+                  Expanded(
+                    child: _DayCell(
+                      metrics: metrics,
+                      date: cells[row * 7 + col].date,
+                      isCurrentMonth: cells[row * 7 + col].isCurrentMonth,
+                      rangeStart: rangeStart,
+                      rangeEnd: rangeEnd,
+                      onTap: () => onDaySelected(cells[row * 7 + col].date),
                     ),
-                ],
-              ),
-            ],
-            if (reservedRows > 0)
-              SizedBox(
-                height:
-                    reservedRows * (metrics.dayCellHeight + metrics.dayRowGap),
-              ),
+                  ),
+              ],
+            ),
           ],
-        ),
+          if (reservedRows > 0)
+            SizedBox(
+              height:
+                  reservedRows * (metrics.dayCellHeight + metrics.dayRowGap),
+            ),
+        ],
       ),
     );
   }
@@ -139,19 +135,22 @@ class _DayCell extends StatelessWidget {
         ? AppColors.textPrimaryDark.withValues(alpha: 0.8)
         : AppColors.textMuted;
 
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: SizedBox(
-        height: metrics.dayCellHeight,
-        child: DecoratedBox(
-          decoration: background != null
-              ? BoxDecoration(color: background, borderRadius: radius)
-              : const BoxDecoration(),
-          child: Center(
-            child: Text(
-              '${date.day}',
-              style: metrics.dayCellStyle.copyWith(color: textColor),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: radius ?? BorderRadius.circular(metrics.dayCellRadius),
+        child: SizedBox(
+          height: metrics.dayCellHeight,
+          child: DecoratedBox(
+            decoration: background != null
+                ? BoxDecoration(color: background, borderRadius: radius)
+                : const BoxDecoration(),
+            child: Center(
+              child: Text(
+                '${date.day}',
+                style: metrics.dayCellStyle.copyWith(color: textColor),
+              ),
             ),
           ),
         ),
