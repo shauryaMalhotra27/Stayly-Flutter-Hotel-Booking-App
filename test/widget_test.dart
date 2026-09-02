@@ -3,30 +3,29 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_hotel_booking_app/app/app.dart';
 import 'package:flutter_hotel_booking_app/core/widgets/custom_bottom_navigation_bar.dart';
+import 'package:flutter_hotel_booking_app/features/hotel/views/hotel_view.dart';
+import 'package:flutter_hotel_booking_app/l10n/app_strings.dart';
 
 void main() {
   testWidgets('App shell and bottom navigation render correctly', (
     WidgetTester tester,
   ) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(const ProviderScope(child: App()));
+    await tester.pump();
 
-    // Verify that the initial route (Dashboard) renders
-    expect(find.text('Dashboard Placeholder'), findsOneWidget);
-
-    // Verify that the CustomBottomNavigationBar is rendered
+    expect(
+      find.textContaining(AppStrings.current.userDisplayName),
+      findsWidgets,
+    );
     expect(find.byType(CustomBottomNavigationBar), findsOneWidget);
 
-    // Tap on the second nav item (Hotels Resort tab), identified by its icon.
-    // The nav bar renders two Icon widgets per tab (a hidden layout-reserving
-    // copy plus the visible one), so take the first match.
     await tester.tap(
-      find.byIcon(Icons.flight_takeoff_outlined).first,
-      warnIfMissed: false,
+      find.bySemanticsLabel(AppStrings.current.navHotelsResort),
     );
-    await tester.pumpAndSettle();
+    await tester.pump();
 
-    // Verify that the Hotel view is displayed
-    expect(find.text('Hotel Placeholder'), findsOneWidget);
+    expect(find.byType(HotelView), findsOneWidget);
+
+    await tester.pump(const Duration(seconds: 2));
   });
 }
