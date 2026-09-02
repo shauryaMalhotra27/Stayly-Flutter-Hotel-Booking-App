@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+import 'app_colors.dart';
+import 'app_sizes.dart';
 
-/// Centralized typography tokens based on Figma design.
+/// Typography tokens. Nohemi matches Figma wireframes.
 class AppTypography {
   AppTypography._();
 
-  static const String fontFamily =
-      'Inter'; // Defaulting to Inter as primary from Figma
+  static const String fontFamily = 'Nohemi';
 
-  // Weights
   static const FontWeight regular = FontWeight.w400;
   static const FontWeight medium = FontWeight.w500;
   static const FontWeight semiBold = FontWeight.w600;
   static const FontWeight bold = FontWeight.w700;
 
-  // TextTheme
   static const TextTheme textTheme = TextTheme(
     displayLarge: TextStyle(
       fontFamily: fontFamily,
@@ -30,7 +29,6 @@ class AppTypography {
       fontSize: 20.0,
       fontWeight: semiBold,
     ),
-
     headlineLarge: TextStyle(
       fontFamily: fontFamily,
       fontSize: 18.0,
@@ -46,7 +44,6 @@ class AppTypography {
       fontSize: 16.0,
       fontWeight: medium,
     ),
-
     titleLarge: TextStyle(
       fontFamily: fontFamily,
       fontSize: 16.0,
@@ -62,7 +59,6 @@ class AppTypography {
       fontSize: 14.0,
       fontWeight: medium,
     ),
-
     bodyLarge: TextStyle(
       fontFamily: fontFamily,
       fontSize: 16.0,
@@ -78,7 +74,6 @@ class AppTypography {
       fontSize: 13.0,
       fontWeight: regular,
     ),
-
     labelLarge: TextStyle(
       fontFamily: fontFamily,
       fontSize: 14.0,
@@ -95,4 +90,115 @@ class AppTypography {
       fontWeight: regular,
     ),
   );
+
+  // --- Named styles (responsive sizes from AppSizes) ---
+
+  /// Dashboard greeting — Figma 35 Regular, LH 43.
+  static TextStyle greeting(BuildContext context, {required double scale}) {
+    final size = AppSizes.textGreeting(context) * scale;
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: size,
+      fontWeight: regular,
+      height: 43 / 35,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  static TextStyle searchHint(BuildContext context, {required double scale}) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: AppSizes.textSearchHint(context) * scale,
+      fontWeight: regular,
+      letterSpacing: 0.015 * 17,
+      color: AppColors.textSecondary,
+    );
+  }
+
+  static TextStyle cardTitle(BuildContext context, {required double scale}) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: AppSizes.textCardTitle(context) * scale,
+      fontWeight: semiBold,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  static TextStyle metaLabel(BuildContext context, {required double scale}) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: AppSizes.textMetaLabel(context) * scale,
+      fontWeight: regular,
+      color: AppColors.textSecondary,
+    );
+  }
+
+  static TextStyle metaValue(BuildContext context, {required double scale}) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: AppSizes.textMetaValue(context) * scale,
+      fontWeight: medium,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  static TextStyle hotelName(BuildContext context, {required double scale}) {
+    final size = AppSizes.textHotelName(context) * scale;
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: size,
+      fontWeight: semiBold,
+      height: 26 / 20,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  static TextStyle detailMeta(BuildContext context, {required double scale}) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: AppSizes.textDetailMeta(context) * scale,
+      fontWeight: regular,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  static TextStyle rating(BuildContext context, {required double scale}) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: AppSizes.textDetailMeta(context) * scale,
+      fontWeight: regular,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  static TextStyle address(BuildContext context, {required double scale}) {
+    final size = AppSizes.textAddress(context) * scale;
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: size,
+      fontWeight: regular,
+      height: 22 / 16,
+      color: AppColors.textSecondary,
+    );
+  }
+
+  static TextStyle sectionTitle(BuildContext context, {required double scale}) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: AppSizes.textSectionTitle(context) * scale,
+      fontWeight: semiBold,
+      color: AppColors.textPrimaryDark,
+    );
+  }
+
+  static TextStyle description(BuildContext context, {required double scale}) {
+    final size = AppSizes.textDescription(context) * scale;
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: size,
+      fontWeight: regular,
+      height: 24 / 16,
+      color: AppColors.textMuted,
+    );
+  }
 }

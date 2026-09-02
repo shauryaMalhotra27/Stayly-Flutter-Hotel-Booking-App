@@ -1,0 +1,30 @@
+[
+  {
+    "id": "toronto-1",
+    "locationTitle": "Toronto, Canada",
+    "distance": "150KM",
+    "availableDates": "OCT 24-25",
+    "price": "$50.00",
+    "imageAsset": "assets/images/propertyOne.png",
+    "hostImageAsset": "assets/images/user.png",
+    "hotelName": "Hosted by Trang Luxury, Lifestyle",
+    "rating": 4.9,
+    "reviewCount": 1648,
+    "fullAddress": "1155 Rue Sherbrooke Ouest, Toronto, Canada H3A 2N3",
+    "description": "Experience a comfortable and memorable stay at our hotel, where modern amenities, warm hospitality, and convenient surroundings come together. Designed for both business and leisure travelers, the hotel offers well-appointed rooms, quality facilities, and attentive service to make every stay relaxing and enjoyable.\n\nGuests can enjoy comfortable accommodation, delicious dining options, high-speed Wi-Fi, housekeeping services, and convenient access to nearby attractions and business destinations. Whether you are visiting for a short business trip, a family vacation, or a weekend getaway, our hotel provides everything you need for a pleasant and hassle-free stay.\n\nWith a welcoming atmosphere, thoughtful services, and a commitment to guest satisfaction, we aim to make every visit comfortable, convenient, and memorable."
+  },
+  {
+    "id": "bali-1",
+    "locationTitle": "Bali, Indonesia",
+    "distance": "85KM",
+    "availableDates": "NOV 12-14",
+    "price": "$78.00",
+    "imageAsset": "assets/images/propertyTwo.png",
+    "hostImageAsset": "assets/images/user.png",
+    "hotelName": "Hosted by Ocean Breeze Villas",
+    "rating": 4.7,
+    "reviewCount": 932,
+    "fullAddress": "Jl. Kayu Aya No. 88, Seminyak, Bali 80361, Indonesia",
+    "description": "Unwind in a serene beachfront villa surrounded by tropical gardens and ocean views. Private pools, open-air lounges, and thoughtful amenities make this retreat ideal for couples and small groups seeking calm after busy travel days.\n\nEnjoy fresh island cuisine, complimentary sunrise yoga, and easy access to Seminyak’s cafes and nightlife. Every stay is designed around comfort, quiet mornings, and warm Balinese hospitality."
+  }
+]
