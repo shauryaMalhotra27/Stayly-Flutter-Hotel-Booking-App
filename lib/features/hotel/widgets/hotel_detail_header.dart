@@ -24,32 +24,16 @@ class HotelDetailHeader extends StatefulWidget {
 }
 
 class _HotelDetailHeaderState extends State<HotelDetailHeader> {
-  late final PageController _pageController;
   int _currentPage = 0;
 
   List<String> get _gallery => widget.hotel.imageAssets;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
-  }
 
   @override
   void didUpdateWidget(covariant HotelDetailHeader oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.hotel.id != widget.hotel.id) {
       _currentPage = 0;
-      if (_pageController.hasClients) {
-        _pageController.jumpToPage(0);
-      }
     }
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 
   @override
@@ -77,19 +61,45 @@ class _HotelDetailHeaderState extends State<HotelDetailHeader> {
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(m.cardRadius),
                   ),
-                  child: PageView.builder(
-                    controller: _pageController,
-                    itemCount: gallery.length,
-                    onPageChanged: (index) =>
-                        setState(() => _currentPage = index),
-                    itemBuilder: (context, index) {
-                      return Image.asset(
-                        gallery[index],
+                  child: GestureDetector(
+                    onHorizontalDragEnd: (details) {
+                      final v = details.primaryVelocity ?? 0;
+                      if (v < -200 && _currentPage < gallery.length - 1) {
+                        setState(() => _currentPage++);
+                      } else if (v > 200 && _currentPage > 0) {
+                        setState(() => _currentPage--);
+                      }
+                    },
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 420),
+                      switchInCurve: Curves.easeInOut,
+                      switchOutCurve: Curves.easeInOut,
+                      // Stack old + new so both fade together (crossfade/dissolve).
+                      layoutBuilder: (currentChild, previousChildren) {
+                        return Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            ...previousChildren,
+                            ?currentChild,
+                          ],
+                        );
+                      },
+                      transitionBuilder: (child, animation) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                      child: Image.asset(
+                        gallery[_currentPage],
+                        key: ValueKey(
+                          '${hotel.id}_${gallery[_currentPage]}',
+                        ),
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,
-                      );
-                    },
+                      ),
+                    ),
                   ),
                 ),
               ),
