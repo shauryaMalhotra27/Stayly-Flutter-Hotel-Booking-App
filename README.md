@@ -18,8 +18,8 @@ Demo catalog: **5 properties** (Toronto, Bali, Santorini, Kyoto, Maldives), each
 Also required:
 
 - [FVM](https://fvm.app) **or** a local Flutter SDK matching the version in `.fvmrc`
-- Android Studio / Xcode command-line tools if you run on a device or emulator
-- A connected Android/iOS device or an emulator/simulator
+- Android Studio command-line tools if you run on a device or emulator
+- A connected Android device or an emulator
 
 Do **not** use a different Flutter version. Layout, Gradle plugin compatibility, and Dart language features in this project were developed against **3.47.2**.
 
